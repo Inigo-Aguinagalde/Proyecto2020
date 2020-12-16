@@ -1,0 +1,14 @@
+{
+  "name": "DI",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+
+  "scripts": {
+    "start": "electron ."
+  },
+
+  "devDependencies": {
+    "electron": "^11.1.0"
+  }
+}
