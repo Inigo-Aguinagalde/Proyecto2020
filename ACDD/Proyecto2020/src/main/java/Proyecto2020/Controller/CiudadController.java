@@ -40,7 +40,7 @@ public class CiudadController {
     }
 
 
-    @RequestMapping(path="/updateAlumno")
+    @RequestMapping(path="/updateCiudad")
 	public @ResponseBody Ciudad updateCiudad (@RequestParam String id,String nombre, String latitud, String longitud) {
 
 		Ciudad a = DR.findById(id).orElse(null);
