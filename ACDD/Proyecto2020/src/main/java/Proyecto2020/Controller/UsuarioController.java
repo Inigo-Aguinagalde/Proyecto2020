@@ -1,6 +1,8 @@
 package Proyecto2020.Controller;
 
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,46 +15,44 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Proyecto2020.Repository.RutasRepository;
+import Proyecto2020.Repository.UsuariosRepository;
 import Proyecto2020.model.Rutas;
+import Proyecto2020.model.Usuarios;
 
-@RequestMapping("/rutas")
+@RequestMapping("/usuario")
 @RestController
-public class RutasController {
+public class UsuarioController {
 
 	@Autowired
-	private RutasRepository RR;
+	private UsuariosRepository RR;
 	
 	@GetMapping("/todas")
-	public List<Rutas>getRutas(){
+	public List<Usuarios> getUsuario(){
 				
 		return RR.findAll();
 	}
 	
 	@PostMapping("/añadir")
-	public Rutas añadirRuta(@RequestBody Rutas r) {
+	public Usuarios añadirUsuario(@RequestBody Usuarios s) {
 		
 		
-		return RR.save(r);
+		return RR.save(s);
 	}
 	
-	@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
+	@RequestMapping("/updateUsuario")
+	public @ResponseBody Usuarios updateRuta(@RequestParam String id, String usurname, String email, String password) {
 		
-		Rutas r = RR.findById(id).orElse(null);
+		Usuarios s = RR.findById(id).orElse(null);
 		
-		if(nombre==null) {
-			r.getNombre();
-		}else if(duracion==null) {
-			r.getDuracion();
-		}else if(id_localizaciones==null) {
-			r.getId_Localizaciones();
-		}else if(km==0) {
-			r.getKm();
-		}else if(ciudad==null) {
-			r.getCiudad();
+		if(usurname==null) {
+			s.getName();
+		}else if(email==null) {
+			s.getEmail();
+		}else if(password==null) {
+			s.getPassword();
 		}
 		
-		return r;
+		return s;
 	}
 	
 }

@@ -1,4 +1,4 @@
-package Proyecto2020.model;
+/*package Proyecto2020.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -64,3 +64,4 @@ public class Ciudad {
 
 
 }
+*/

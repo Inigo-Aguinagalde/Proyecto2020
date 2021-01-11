@@ -11,20 +11,26 @@ public class Rutas {
 	
 	private String nombre;
 	
-	private String tiempo;
+	private String duracion;
 	
-	private String puntos;
+	private String id_Localizaciones;
 
-	public Rutas() {
-		super();
-	}
+	private String ciudad;
+	
+	private int km;
 
-	public Rutas(String id, String nombre, String tiempo, String puntos) {
+	public Rutas(String id, String nombre, String duracion, String id_Localizaciones, String ciudad, int km) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
-		this.tiempo = tiempo;
-		this.puntos = puntos;
+		this.duracion = duracion;
+		this.id_Localizaciones = id_Localizaciones;
+		this.ciudad = ciudad;
+		this.km = km;
+	}
+
+	public Rutas() {
+		super();
 	}
 
 	public String getId() {
@@ -43,20 +49,36 @@ public class Rutas {
 		this.nombre = nombre;
 	}
 
-	public String getTiempo() {
-		return tiempo;
+	public String getDuracion() {
+		return duracion;
 	}
 
-	public void setTiempo(String tiempo) {
-		this.tiempo = tiempo;
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
 	}
 
-	public String getPuntos() {
-		return puntos;
+	public String getId_Localizaciones() {
+		return id_Localizaciones;
 	}
 
-	public void setPuntos(String puntos) {
-		this.puntos = puntos;
+	public void setId_Localizaciones(String id_Localizaciones) {
+		this.id_Localizaciones = id_Localizaciones;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public int getKm() {
+		return km;
+	}
+
+	public void setKm(int km) {
+		this.km = km;
 	}
 	
 	

@@ -3,25 +3,27 @@ package Proyecto2020.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="Localizaciones")
-public class Localizaciones {
-	
+@Document(collection="Localizacion_usuarios")
+public class Localizacion_usuarios {
+
 	@Id
 	private String id;
 	
-	private String id_preguntas;
-	private String latitud;
-	private String longitud;
+	private String id_usuarios;
 	
-	public Localizaciones(String id, String id_preguntas, String latitud, String longitud) {
+	private String latitud;
+	
+	private String longitud;
+
+	public Localizacion_usuarios(String id, String id_usuarios, String latitud, String longitud) {
 		super();
 		this.id = id;
-		this.id_preguntas = id_preguntas;
+		this.id_usuarios = id_usuarios;
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
 
-	public Localizaciones() {
+	public Localizacion_usuarios() {
 		super();
 	}
 
@@ -33,12 +35,12 @@ public class Localizaciones {
 		this.id = id;
 	}
 
-	public String getId_preguntas() {
-		return id_preguntas;
+	public String getId_usuarios() {
+		return id_usuarios;
 	}
 
-	public void setId_preguntas(String id_preguntas) {
-		this.id_preguntas = id_preguntas;
+	public void setId_usuarios(String id_usuarios) {
+		this.id_usuarios = id_usuarios;
 	}
 
 	public String getLatitud() {
@@ -59,6 +61,4 @@ public class Localizaciones {
 	
 	
 	
-	
-
 }
