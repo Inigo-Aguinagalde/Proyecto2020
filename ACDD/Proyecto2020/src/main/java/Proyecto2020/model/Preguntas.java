@@ -15,7 +15,7 @@ public class Preguntas {
 
 	private String respuesta2;
 
-	private String repuesta3;
+	private String respuesta3;
 
 	public Preguntas() {
 		super();
@@ -27,7 +27,7 @@ public class Preguntas {
 		this.pregunta = pregunta;
 		this.respuesta = respuesta;
 		this.respuesta2 = respuesta2;
-		this.repuesta3 = repuesta3;
+		this.respuesta3 = repuesta3;
 	}
 
 	public String getId() {
@@ -62,12 +62,12 @@ public class Preguntas {
 		this.respuesta2 = respuesta2;
 	}
 
-	public String getRepuesta3() {
-		return repuesta3;
+	public String getRespuesta3() {
+		return respuesta3;
 	}
 
-	public void setRepuesta3(String repuesta3) {
-		this.repuesta3 = repuesta3;
+	public void setRespuesta3(String respuesta3) {
+		this.respuesta3 = respuesta3;
 	}
 
 

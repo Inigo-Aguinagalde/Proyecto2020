@@ -10,4 +10,6 @@ import Proyecto2020.model.Usuarios;
 public interface UsuariosRepository extends MongoRepository<Usuarios, String>{
 
 	public Optional<Usuarios> findById(String id);
+
+	public Optional<Usuarios> findByEmail(String email);
 }

@@ -22,25 +22,25 @@ public class PreguntasController {
 
 	@Autowired
 	private PreguntasRepository RR;
-	
+
 	@GetMapping("/todas")
 	public List<Preguntas> get(){
-				
+
 		return RR.findAll();
 	}
-	
+
 	@PostMapping("/añadir")
 	public Preguntas añadirPreguntas(@RequestBody Preguntas p ) {
-		
-		
+
+
 		return RR.save(p);
 	}
-	
+
 	@RequestMapping("/update")
 	public @ResponseBody Preguntas updateRuta(@RequestParam String id, String pregunta, String repuesta1, String respuesta2,String respuesta3 ) {
-		
+
 		Preguntas p = RR.findById(id).orElse(null);
-		
+
 		if(pregunta==null) {
 			p.getPregunta();
 		}else if(repuesta1==null) {
@@ -48,10 +48,10 @@ public class PreguntasController {
 		}else if(respuesta2==null) {
 			p.getRespuesta2();
 		}else if(respuesta3==null) {
-			p.getRepuesta3();
+			p.getRespuesta3();
 		}
-		
+
 		return p;
 	}
-	
+
 }
