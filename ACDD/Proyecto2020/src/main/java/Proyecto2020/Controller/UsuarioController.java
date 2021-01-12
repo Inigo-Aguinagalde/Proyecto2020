@@ -60,14 +60,12 @@ public class UsuarioController {
 
 		if(s==null){
 			login=false;
-
 		}else{
-			if(s.getPassword()==password){
+			if(s.getPassword().equals(password)){
 				login=true;
 			}
 		}
 		return login;
-
 	}
 
 }
