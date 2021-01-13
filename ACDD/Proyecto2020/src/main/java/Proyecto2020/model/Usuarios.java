@@ -16,7 +16,7 @@ public class Usuarios {
 	private String email;
 
 
-	public Usuarios(String name, String password,String email) {
+	public Usuarios(String name, String email, String password) {
 		super();
 		this.name = name;
 		this.password = password;

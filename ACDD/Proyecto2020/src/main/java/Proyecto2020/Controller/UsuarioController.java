@@ -35,14 +35,15 @@ public class UsuarioController {
 		boolean añadido = false;
 
 		Usuarios s = new Usuarios(username,email,password);
+		Long comprobacionEmail = RR.countByEmail(email);
 
-		RR.save(s);
-
-		Usuarios comprobacion = RR.findByEmail(email).orElse(null);
-		if(comprobacion != null){
+		if(comprobacionEmail == 0){
+			RR.save(s);
+			System.out.println("guardado con exito");
 			añadido = true;
 		}
 
+		System.out.println("finalizar "+comprobacionEmail);
 		return añadido;
 
 	}

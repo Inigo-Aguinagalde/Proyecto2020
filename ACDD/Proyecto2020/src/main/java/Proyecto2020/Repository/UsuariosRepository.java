@@ -12,4 +12,6 @@ public interface UsuariosRepository extends MongoRepository<Usuarios, String>{
 	public Optional<Usuarios> findById(String id);
 
 	public Optional<Usuarios> findByEmail(String email);
+
+	public Long countByEmail(String email);
 }
