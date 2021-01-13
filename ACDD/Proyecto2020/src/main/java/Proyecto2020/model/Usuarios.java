@@ -12,16 +12,12 @@ public class Usuarios {
 	private String name;
 
 	private String password;
-	
+
 	private String email;
 
-	public Usuarios() {
-		super();
-	}
 
-	public Usuarios(String id, String name, String password,String email) {
+	public Usuarios(String name, String password,String email) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.email= email;
@@ -58,6 +54,6 @@ public class Usuarios {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 
 }

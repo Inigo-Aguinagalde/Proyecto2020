@@ -30,18 +30,29 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/añadir")
-	public Usuarios añadirUsuario(@RequestBody Usuarios s) {
+	public boolean añadirUsuario(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
 
+		boolean añadido = false;
 
-		return RR.save(s);
+		Usuarios s = new Usuarios(username,email,password);
+
+		RR.save(s);
+
+		Usuarios comprobacion = RR.findByEmail(email).orElse(null);
+		if(comprobacion != null){
+			añadido = true;
+		}
+
+		return añadido;
+
 	}
 
 	@RequestMapping("/updateUsuario")
-	public @ResponseBody Usuarios updateRuta(@RequestParam String id, String usurname, String email, String password) {
+	public @ResponseBody Usuarios updateRuta(@RequestParam String id, String username, String email, String password) {
 
 		Usuarios s = RR.findById(id).orElse(null);
 
-		if(usurname==null) {
+		if(username==null) {
 			s.getName();
 		}else if(email==null) {
 			s.getEmail();
@@ -53,7 +64,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/login")
-	public boolean username(@RequestParam String email ,@RequestParam String password){
+	public @ResponseBody boolean username(@RequestParam String email ,@RequestParam String password){
 
 		Usuarios s = RR.findByEmail(email).orElse(null);
 		boolean login = false;
@@ -65,7 +76,13 @@ public class UsuarioController {
 				login=true;
 			}
 		}
+
 		return login;
 	}
 
+	@GetMapping("/detalles")
+	public Usuarios detalles(@RequestParam String email){
+		Usuarios s = RR.findByEmail(email).orElse(null);
+		return s;
+	}
 }
