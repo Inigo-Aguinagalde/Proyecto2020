@@ -8,15 +8,15 @@ public class Rutas {
 
 	@Id
 	private String id;
-	
+
 	private String nombre;
-	
+
 	private String duracion;
-	
+
 	private String id_Localizaciones;
 
 	private String ciudad;
-	
+
 	private int km;
 
 	public Rutas(String id, String nombre, String duracion, String id_Localizaciones, String ciudad, int km) {
@@ -80,7 +80,7 @@ public class Rutas {
 	public void setKm(int km) {
 		this.km = km;
 	}
-	
-	
-	
+
+
+
 }

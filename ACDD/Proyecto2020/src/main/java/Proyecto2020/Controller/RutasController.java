@@ -21,25 +21,25 @@ public class RutasController {
 
 	@Autowired
 	private RutasRepository RR;
-	
+
 	@GetMapping("/todas")
-	public List<Rutas>getRutas(){
-				
+	public List<Rutas> getRutas(){
+
 		return RR.findAll();
 	}
-	
+
 	@PostMapping("/añadir")
 	public Rutas añadirRuta(@RequestBody Rutas r) {
-		
-		
+
+
 		return RR.save(r);
 	}
-	
+
 	@RequestMapping("/updateCiudad")
 	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
-		
+
 		Rutas r = RR.findById(id).orElse(null);
-		
+
 		if(nombre==null) {
 			r.getNombre();
 		}else if(duracion==null) {
@@ -51,8 +51,8 @@ public class RutasController {
 		}else if(ciudad==null) {
 			r.getCiudad();
 		}
-		
+
 		return r;
 	}
-	
+
 }
