@@ -1,5 +1,8 @@
 package Proyecto2020.model;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,18 +16,18 @@ public class Rutas {
 
 	private String duracion;
 
-	private String id_Localizaciones;
+	private List lista_puntos;
 
 	private String ciudad;
 
 	private int km;
 
-	public Rutas(String id, String nombre, String duracion, String id_Localizaciones, String ciudad, int km) {
+	private double puntos;
+
+	public Rutas(String nombre, String duracion, String ciudad, int km) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.duracion = duracion;
-		this.id_Localizaciones = id_Localizaciones;
 		this.ciudad = ciudad;
 		this.km = km;
 	}
@@ -57,12 +60,16 @@ public class Rutas {
 		this.duracion = duracion;
 	}
 
-	public String getId_Localizaciones() {
-		return id_Localizaciones;
+	public List getlista_puntos() {
+		return lista_puntos;
 	}
 
-	public void setId_Localizaciones(String id_Localizaciones) {
-		this.id_Localizaciones = id_Localizaciones;
+	public void add_location(String id_Localizaciones) {
+		this.lista_puntos.add(id_Localizaciones);
+	}
+
+	public void remove_location(String id_Localizaciones){
+		this.lista_puntos.remove(id_Localizaciones);
 	}
 
 	public String getCiudad() {
