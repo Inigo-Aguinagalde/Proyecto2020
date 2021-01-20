@@ -1,6 +1,7 @@
 package Proyecto2020.Controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,15 @@ public class RutasController {
 	}
 
 	@PostMapping("/añadir")
-	public Rutas añadirRuta(@RequestParam String nombre, @RequestParam String duracion, @RequestParam String id_localizaciones, @RequestParam int km, @RequestParam String ciudad) {
+	public Rutas añadirRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam ArrayList<String> lista_puntos,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
 
-		Rutas r = new Rutas(nombre,duracion,ciudad,km);
+		Rutas r = new Rutas(nombre,lista_puntos,duracion,ciudad,km,puntos);
 
 		return RR.save(r);
 	}
 
 	@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad,ArrayList lista_puntos) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
@@ -45,8 +46,8 @@ public class RutasController {
 			r.getNombre();
 		}else if(duracion==null) {
 			r.getDuracion();
-		}else if(id_localizaciones==null) {
-			r.getId_Localizaciones();
+		}else if(lista_puntos==null) {
+			r.getLista_puntos();
 		}else if(km==0) {
 			r.getKm();
 		}else if(ciudad==null) {

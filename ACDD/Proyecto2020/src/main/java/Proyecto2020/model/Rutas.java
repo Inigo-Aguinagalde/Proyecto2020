@@ -1,6 +1,7 @@
 package Proyecto2020.model;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -16,25 +17,46 @@ public class Rutas {
 
 	private String duracion;
 
-	private List lista_puntos;
+	private ArrayList<String> lista_puntos;
 
 	private String ciudad;
 
 	private int km;
 
-	private double puntos;
+	private int puntos;
 
-	public Rutas(String nombre, String duracion, String ciudad, int km) {
+
+
+
+
+
+	public Rutas(String id, String nombre, ArrayList lista_puntos,String duracion, String ciudad, int km, int puntos) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.duracion = duracion;
+		this.lista_puntos = lista_puntos;
 		this.ciudad = ciudad;
 		this.km = km;
+		this.puntos = puntos;
 	}
+
+
 
 	public Rutas() {
 		super();
 	}
+
+	public Rutas(String nombre, ArrayList lista_puntos, String duracion, String ciudad, int km, int puntos) {
+		this.nombre=nombre;
+		this.lista_puntos=lista_puntos;
+		this.duracion=duracion;
+		this.ciudad=ciudad;
+		this.km=km;
+		this.puntos=puntos;
+	}
+
+
 
 	public String getId() {
 		return id;
@@ -60,9 +82,6 @@ public class Rutas {
 		this.duracion = duracion;
 	}
 
-	public List getlista_puntos() {
-		return lista_puntos;
-	}
 
 	public void add_location(String id_Localizaciones) {
 		this.lista_puntos.add(id_Localizaciones);
@@ -80,6 +99,14 @@ public class Rutas {
 		this.ciudad = ciudad;
 	}
 
+	public ArrayList getLista_puntos() {
+		return lista_puntos;
+	}
+
+	public void setLista_puntos(ArrayList<String> lista_puntos) {
+		this.lista_puntos = lista_puntos;
+	}
+
 	public int getKm() {
 		return km;
 	}
@@ -87,6 +114,16 @@ public class Rutas {
 	public void setKm(int km) {
 		this.km = km;
 	}
+
+	public double getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+
+
 
 
 
