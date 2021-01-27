@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget {
-  Game({Key key}) : super(key: key);
+  Game(ruta, {Key key}) : super(key: key);
 
   @override
   _GameState createState() => _GameState();

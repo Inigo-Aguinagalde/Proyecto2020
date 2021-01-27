@@ -32,7 +32,7 @@ public class RutasController {
 	@PostMapping("/añadir")
 	public Rutas añadirRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam ArrayList<String> lista_puntos,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
 
-		Rutas r = new Rutas(nombre,lista_puntos,duracion,ciudad,km,puntos);
+		Rutas r = new Rutas(nombre,ciudad, lista_puntos,duracion,ciudad,km,puntos);
 
 		return RR.save(r);
 	}
@@ -56,5 +56,17 @@ public class RutasController {
 
 		return r;
 	}
+
+	@GetMapping("/byId")
+	public Rutas getRuta(@RequestParam String id){
+
+		Rutas r = RR.findById(id).orElse(null);
+
+		return r;
+
+	}
+
+
+
 
 }

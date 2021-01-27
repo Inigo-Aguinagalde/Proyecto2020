@@ -3,12 +3,12 @@ import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/views/Game_view.dart';
 
-class RouteSelection extends StatefulWidget {
-  const RouteSelection({Key key}) : super(key: key);
+class WidgetRoute extends StatefulWidget {
+  const WidgetRoute({Key key}) : super(key: key);
   _WidgetRoute createState() => _WidgetRoute();
 }
 
-class _WidgetRoute extends State<RouteSelection> {
+class _WidgetRoute extends State<WidgetRoute> {
   var ruta;
 
   List<Ruta> _rutas = List<Ruta>();
@@ -43,20 +43,8 @@ class _WidgetRoute extends State<RouteSelection> {
                         fontSize: 22,
                       ),
                     ),
-                    Text('Ciudad: ' + _rutas[index].ciudad),
-                    Text('Duracion:' + _rutas[index].duracion + 'h'),
-                    // ignore: missing_required_param
-                    IconButton(
-                      icon: Icon(Icons.check),
-                      tooltip: 'Increase volume by 10',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Game(_rutas[index].id)),
-                        );
-                      },
-                    ),
+                    Text(_rutas[index].ciudad),
+                    Text(_rutas[index].duracion)
                   ],
                 ));
           },
