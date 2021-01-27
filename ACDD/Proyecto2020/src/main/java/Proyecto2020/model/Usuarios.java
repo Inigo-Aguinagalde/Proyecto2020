@@ -15,6 +15,7 @@ public class Usuarios {
 
 	private String email;
 
+	private boolean admin;
 
 	public Usuarios(String name, String email, String password) {
 		super();
@@ -55,5 +56,12 @@ public class Usuarios {
 		this.email = email;
 	}
 
+	public boolean getAdmin(){
+		return admin;
+	}
+
+	public void setAdmin(boolean reversa){
+		this.admin = reversa;
+	}
 
 }

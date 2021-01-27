@@ -81,8 +81,31 @@ public class UsuarioController {
 		return login;
 	}
 
-	@GetMapping("/detalles")
-	public Usuarios detalles(@RequestParam String email){
+	@RequestMapping("/loginAdmin")
+	public @ResponseBody boolean admin(@RequestParam String email ,@RequestParam String password){
+
+		Usuarios s = RR.findByEmail(email).orElse(null);
+		boolean login = false;
+
+		if(s==null){
+			login=false;
+		}else{
+			if(s.getPassword().equals(password) && s.getAdmin()==true){
+				login=true;
+			}
+		}
+
+		return login;
+	}
+
+	@GetMapping("/GetUsername")
+	public String getUsername(@RequestParam String email){
+		Usuarios s = RR.findByEmail(email).orElse(null);
+		return s.getName();
+	}
+
+	@GetMapping("/GetUser")
+	public Usuarios getUser(@RequestParam String email){
 		Usuarios s = RR.findByEmail(email).orElse(null);
 		return s;
 	}

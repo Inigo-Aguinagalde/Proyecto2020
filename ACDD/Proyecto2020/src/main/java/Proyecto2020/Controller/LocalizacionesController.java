@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Proyecto2020.Repository.LocalizacionesRepository;
 import Proyecto2020.model.Localizaciones;
+import Proyecto2020.model.Usuarios;
 
 
 @RequestMapping("/localizaciones")
@@ -21,34 +22,57 @@ public class LocalizacionesController{
 
 	@Autowired
 	private LocalizacionesRepository RR;
-	
+
 	@GetMapping("/todas")
 	public List<Localizaciones> getLocalizaciones(){
-				
+
 		return RR.findAll();
 	}
-	
+
 	@PostMapping("/añadir")
 	public Localizaciones añadirLocalizaciones(@RequestBody Localizaciones l ) {
-		
-		
+
+
 		return RR.save(l);
 	}
-	
-	@RequestMapping("/update")
-	public @ResponseBody Localizaciones updateLocalizacion(@RequestParam String id, String id_preguntas, String latitud , String longitud ) {
-		
+
+	@GetMapping("/findByID")
+	public Localizaciones seleccionarLoc(@RequestParam String id){
 		Localizaciones l = RR.findById(id).orElse(null);
-		
-		if(id_preguntas==null) {
-			l.getId_preguntas();
-		}else if(latitud==null) {
-			l.getLatitud();
-		}else if(longitud==null) {
-			l.getLongitud();
-		}
-		
 		return l;
 	}
-	
+
+	@RequestMapping("/update")
+	public @ResponseBody Localizaciones updateLocalizacion(@RequestParam String id,String latitud, String longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion ) {
+
+		Localizaciones l = RR.findById(id).orElse(null);
+
+		if(latitud != null) {
+			l.setLatitud(latitud);
+		}
+		if(longitud != null) {
+			l.setLongitud(longitud);
+		}
+		if(nombre != null) {
+			l.setNombre(nombre);
+		}
+		if(pregunta != null) {
+			l.setPregunta(pregunta);
+		}
+		if(respuesta1 != null) {
+			l.setRespuesta1(respuesta1);
+		}
+		if(respuesta2 != null){
+			l.setRespuesta2(respuesta2);
+		}
+		if(respuesta3 != null){
+			l.setRespuesta3(respuesta3);
+		}
+		if(solucion == 0){
+			l.setSolucion(solucion);
+		}
+
+		return l;
+	}
+
 }
