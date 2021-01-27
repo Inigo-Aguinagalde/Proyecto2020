@@ -33,34 +33,36 @@ class _WidgetRoute extends State<RouteSelection> {
         body: ListView.builder(
           itemBuilder: (context, index) {
             return Card(
-                margin: const EdgeInsets.only(
-                    top: 32, bottom: 32, left: 16, right: 18),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      _rutas[index].nombre,
-                      style: TextStyle(
-                        fontSize: 22,
-                      ),
+              margin: const EdgeInsets.only(
+                  top: 32, bottom: 32, left: 16, right: 18),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    _rutas[index].nombre,
+                    style: TextStyle(
+                      fontSize: 22,
                     ),
-                    Text('Ciudad: ' + _rutas[index].ciudad),
-                    Text('Duracion:' + _rutas[index].duracion + 'h'),
-                    // ignore: missing_required_param
-                    IconButton(
-                      icon: Icon(Icons.check),
-                      tooltip: 'Increase volume by 10',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Game(_rutas[index].id)),
-                        );
-                      },
-                    ),
-                  ],
-                ));
+                  ),
+                  Text('Ciudad: ' + _rutas[index].ciudad),
+                  Text('Duracion:' + _rutas[index].duracion + 'h'),
+                  // ignore: missing_required_param
+                  IconButton(
+                    icon: Icon(Icons.check),
+                    tooltip: 'Increase volume by 10',
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Game(ruta: _rutas[index]),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
           },
-          itemCount: _rutas.length,
+          itemCount: _rutas.length - 1,
         ),
       ),
     );
