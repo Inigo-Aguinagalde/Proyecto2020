@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/Models/Ruta.dart';
 
 class Game extends StatefulWidget {
-  Game(ruta, {Key key}) : super(key: key);
+  Game(Ruta ruta, {Key key}) : super(key: key);
 
   @override
   _GameState createState() => _GameState();
@@ -18,9 +19,7 @@ class _GameState extends State<Game> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Pagina game"),
-          ],
+          children: <Widget>[],
         ),
       ),
     );

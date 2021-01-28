@@ -1,25 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
-class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
+import 'package:juego/views/message_screen.dart';
+// import 'ui/login_screen/login_screen.dart';
 
-  @override
-  _ChatState createState() => _ChatState();
-}
+void main() => runApp(MyApp());
 
-class _ChatState extends State<Chat> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Pagina chat"),
-          ],
-        ),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      // home: MessageScreen(),
     );
   }
 }

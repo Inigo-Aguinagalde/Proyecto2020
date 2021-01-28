@@ -45,15 +45,15 @@ class _WidgetRoute extends State<RouteSelection> {
                     ),
                     Text('Ciudad: ' + _rutas[index].ciudad),
                     Text('Duracion:' + _rutas[index].duracion + 'h'),
+                    Text(_rutas[index].id),
                     // ignore: missing_required_param
                     IconButton(
                       icon: Icon(Icons.check),
-                      tooltip: 'Increase volume by 10',
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Game(_rutas[index].id)),
+                              builder: (context) => Game(_rutas[index])),
                         );
                       },
                     ),
