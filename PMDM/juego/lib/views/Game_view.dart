@@ -15,20 +15,20 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  var puntosLogrados = 0;
-  var localizaciones_realizadas = 0;
-  var localizaciones_totales = 0;
-  double porcentaje_realizado = 0.00;
-
   @override
   Widget build(BuildContext context) {
+    List<dynamic> localizaciones = widget.ruta.lista_puntos;
+    int puntosLogrados = 0;
+    int localizaciones_realizadas = 0;
+    int localizaciones_totales = widget.ruta.lista_puntos.length;
+    double porcentaje_realizado = 0.00;
     return Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
         ),*/
       body: Stack(
         children: <Widget>[
-          Mapa(),
+          Mapa(localizaciones),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
@@ -110,7 +110,12 @@ class _GameState extends State<Game> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [],
+                      children: [
+                        Text(
+                          "Cronometro",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                 ),

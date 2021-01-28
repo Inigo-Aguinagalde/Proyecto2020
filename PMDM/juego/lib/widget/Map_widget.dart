@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:juego/Controller/LocalizacionesController.dart';
+import 'package:juego/Models/Localizaciones.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
-  Mapa({this.localizaciones, Key key}) : super(key: key);
+  Mapa(List localizaciones, {Key key}) : super(key: key);
   List<dynamic> localizaciones;
 
   @override
