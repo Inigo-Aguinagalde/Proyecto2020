@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
-import 'package:juego/Models/Ruta.dart';
 
+// ignore: must_be_immutable
 class Mapa extends StatefulWidget {
-  Mapa({Key key}) : super(key: key);
+  Mapa({this.localizaciones, Key key}) : super(key: key);
+  List<dynamic> localizaciones;
 
   @override
   _Mapa createState() => _Mapa();
@@ -32,7 +33,6 @@ class _Mapa extends State<Mapa> {
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
         initialCameraPosition: CameraPosition(
-          //target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
           target: LatLng(43.346868, -1.796799),
           zoom: 15,
         ),

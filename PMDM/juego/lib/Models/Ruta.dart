@@ -23,6 +23,7 @@ class Ruta {
     nombre = json['nombre'];
     ciudad = json['ciudad'];
     duracion = json['duracion'];
+    km = json['km'];
     puntos = json['puntos'];
     lista_puntos = json['lista_puntos'];
   }

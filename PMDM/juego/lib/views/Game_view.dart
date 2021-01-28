@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
 
@@ -7,16 +8,18 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game({
-    Key key,
-    Ruta ruta,
-  }) : super(key: key);
-
+  Game({this.ruta, Key key}) : super(key: key);
+  Ruta ruta;
   @override
   _GameState createState() => _GameState();
 }
 
 class _GameState extends State<Game> {
+  var puntosLogrados = 0;
+  var localizaciones_realizadas = 0;
+  var localizaciones_totales = 0;
+  double porcentaje_realizado = 0.00;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,9 @@ class _GameState extends State<Game> {
                     lineHeight: 20.0,
                     animationDuration: 2000,
                     percent: 0.10,
-                    center: Text("Completado - 00.0%"),
+                    center: Text("Localizaciones ralizadas - " +
+                        porcentaje_realizado.toString() +
+                        "%"),
                     linearStrokeCap: LinearStrokeCap.roundAll,
                     progressColor: Colors.green,
                     backgroundColor: Colors.greenAccent[100],
@@ -51,27 +56,47 @@ class _GameState extends State<Game> {
                 Expanded(
                   child: Container(
                     height: 60,
-                    color: Colors.red,
-                    child: Center(
-                      child: Text(""),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 60,
-                    color: Colors.green,
+                    color: Colors.blue,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Nombre ruta"),
+                        Text("Puntos:", style: TextStyle(color: Colors.white)),
+                        Text(
+                          puntosLogrados.toString() +
+                              "/" +
+                              widget.ruta.puntos.toString(),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 60,
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.ruta.nombre,
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ),
 
                         ///Todos estos datos vienen de la ventana anterior///
-                        Text("Km de ruta"),
+                        Text(
+                          widget.ruta.km.toString() + "-Km",
+                          style: TextStyle(color: Colors.white),
+                        ),
 
                         ///Todos estos datos vienen de la ventana anterior///
-                        Text("Tiempo estimado"),
+                        Text(
+                          widget.ruta.duracion + "h",
+                          style: TextStyle(color: Colors.white),
+                        ),
 
                         ///Todos estos datos vienen de la ventana anterior///
                       ],
@@ -81,8 +106,12 @@ class _GameState extends State<Game> {
                 Expanded(
                   child: Container(
                     height: 60,
-                    color: Colors.grey,
-                    child: Center(child: Text("Cronometro")),
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [],
+                    ),
                   ),
                 ),
               ],

@@ -62,7 +62,7 @@ class _WidgetRoute extends State<RouteSelection> {
               ),
             );
           },
-          itemCount: _rutas.length - 1,
+          itemCount: _rutas.length,
         ),
       ),
     );
