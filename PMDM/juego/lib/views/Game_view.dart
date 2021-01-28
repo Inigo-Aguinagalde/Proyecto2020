@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -7,7 +8,7 @@ import 'package:juego/Models/Ruta.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game(Ruta ruta, {Key key}) : super(key: key);
+  Game({this.ruta, Key key}) : super(key: key);
   Ruta ruta;
   @override
   _GameState createState() => _GameState();
@@ -16,7 +17,6 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
-    List<dynamic> localizaciones = widget.ruta.lista_puntos;
     int puntosLogrados = 0;
     int localizaciones_realizadas = 0;
     int localizaciones_totales = widget.ruta.lista_puntos.length;
@@ -27,7 +27,7 @@ class _GameState extends State<Game> {
         ),*/
       body: Stack(
         children: <Widget>[
-          Mapa(localizaciones),
+          Mapa(widget.ruta.lista_puntos),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [

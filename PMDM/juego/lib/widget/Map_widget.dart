@@ -8,7 +8,7 @@ import 'package:juego/Models/Localizaciones.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
-  Mapa(List localizaciones, {Key key}) : super(key: key);
+  Mapa(List<dynamic> localizaciones, {Key key}) : super(key: key);
   List<dynamic> localizaciones;
 
   @override
@@ -28,6 +28,8 @@ class _Mapa extends State<Mapa> {
     void _onMapCreated(GoogleMapController controller) {
       _controller.complete(controller);
     }
+
+    print("localizaciones" + widget.localizaciones.toString());
 
     if (_currentPosition == null) {
       return GoogleMap(

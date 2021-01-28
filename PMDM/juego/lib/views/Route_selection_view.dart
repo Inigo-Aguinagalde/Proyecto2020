@@ -51,7 +51,7 @@ class _WidgetRoute extends State<RouteSelection> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Game(_rutas[index])),
+                              builder: (context) => Game(ruta: _rutas[index])),
                         );
                       },
                     ),
