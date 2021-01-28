@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
-
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:juego/Models/Ruta.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game({this.ruta, Key key}) : super(key: key);
+  Game(Ruta ruta, {Key key}) : super(key: key);
   Ruta ruta;
   @override
   _GameState createState() => _GameState();
