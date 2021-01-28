@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Proyecto2020.Repository.RutasRepository;
 import Proyecto2020.model.Rutas;
+import Proyecto2020.model.Usuarios;
 
 @RequestMapping("/rutas")
 @RestController
@@ -27,6 +28,12 @@ public class RutasController {
 	public List<Rutas> getRutas(){
 
 		return RR.findAll();
+	}
+	
+	@GetMapping("/ruta")
+	public Rutas detalles(@RequestParam String id){
+		Rutas s = RR.findById(id).orElse(null);
+		return s;
 	}
 
 	@PostMapping("/añadir")
