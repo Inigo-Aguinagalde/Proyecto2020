@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/Controller/LocalizacionesController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
@@ -21,6 +22,16 @@ class _GameState extends State<Game> {
     int localizaciones_realizadas = 0;
     int localizaciones_totales = widget.ruta.lista_puntos.length;
     double porcentaje_realizado = 0.00;
+    List<Localizaciones> listaLoca = List<Localizaciones>();
+
+    for (var i = 0; i < widget.ruta.lista_puntos.length; i++) {
+      fetchLoc(widget.ruta.lista_puntos[i].toString()).then((value) {
+        setState(() {
+          listaLoca.add(value);
+        });
+      });
+    }
+
     return Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
@@ -38,7 +49,7 @@ class _GameState extends State<Game> {
                     animation: true,
                     lineHeight: 20.0,
                     animationDuration: 2000,
-                    percent: 0.20,
+                    percent: 0.10,
                     center: Text("Localizaciones ralizadas - " +
                         porcentaje_realizado.toString() +
                         "%"),
@@ -54,7 +65,7 @@ class _GameState extends State<Game> {
               children: [
                 Expanded(
                   child: Container(
-                    height: 60,
+                    height: 80,
                     color: Colors.blue,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,37 +85,53 @@ class _GameState extends State<Game> {
                 Expanded(
                   flex: 2,
                   child: Container(
-                    height: 60,
+                    height: 80,
                     color: Colors.blue,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           widget.ruta.nombre,
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
-
-                        ///Todos estos datos vienen de la ventana anterior///
-                        Text(
-                          widget.ruta.km.toString() + "-Km",
-                          style: TextStyle(color: Colors.white),
-                        ),
-
-                        ///Todos estos datos vienen de la ventana anterior///
-                        Text(
-                          widget.ruta.duracion + "h",
-                          style: TextStyle(color: Colors.white),
-                        ),
-
-                        ///Todos estos datos vienen de la ventana anterior///
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.compare_arrows_rounded,
+                                  size: 20,
+                                ),
+                                Text(
+                                  widget.ruta.km.toString() + "-Km",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.hourglass_bottom,
+                                  size: 20,
+                                ),
+                                Text(
+                                  widget.ruta.duracion + "h",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Container(
-                    height: 60,
+                    height: 80,
                     color: Colors.blue,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

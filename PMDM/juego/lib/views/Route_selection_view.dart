@@ -32,8 +32,11 @@ class _WidgetRoute extends State<RouteSelection> {
           itemBuilder: (context, index) {
             return Card(
                 margin: const EdgeInsets.only(
-                    top: 32, bottom: 32, left: 16, right: 18),
+                    top: 32, left: 16, right: 18),
+                    color: Colors.blue[50],
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
                       _rutas[index].nombre,
@@ -43,7 +46,6 @@ class _WidgetRoute extends State<RouteSelection> {
                     ),
                     Text('Ciudad: ' + _rutas[index].ciudad),
                     Text('Duracion:' + _rutas[index].duracion + 'h'),
-                    Text(_rutas[index].id),
                     // ignore: missing_required_param
                     IconButton(
                       icon: Icon(Icons.check),

@@ -43,8 +43,8 @@ public class RutasController {
 		return r;
 	}
 
-	@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad,ArrayList lista_puntos) {
+	/*@RequestMapping("/updateCiudad")
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
@@ -61,15 +61,6 @@ public class RutasController {
 		}
 
 		return r;
-	}
-
-	@GetMapping("/byId")
-	public Rutas getRuta(@RequestParam String id){
-
-		Rutas r = RR.findById(id).orElse(null);
-
-		return r;
-
 	}
 
 

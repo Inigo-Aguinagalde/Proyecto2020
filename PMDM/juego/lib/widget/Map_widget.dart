@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,6 +18,7 @@ class Mapa extends StatefulWidget {
 
 class _Mapa extends State<Mapa> {
   Position _currentPosition;
+  List<dynamic> data_list_loc;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,17 @@ class _Mapa extends State<Mapa> {
     void _onMapCreated(GoogleMapController controller) {
       _controller.complete(controller);
     }
+
+    print(widget.localizaciones.toString());
+
+    /*for(var i=0;i<widget.localizaciones.length;i++){
+      fetchLoc(widget.localizaciones[i].toString()).then((value) {
+        setState(() {
+          print(value);
+          //data_list_loc.add(value);
+        });
+      });
+    }*/
 
     if (_currentPosition == null) {
       return GoogleMap(
