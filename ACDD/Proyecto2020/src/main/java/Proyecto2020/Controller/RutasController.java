@@ -37,19 +37,14 @@ public class RutasController {
 		return RR.save(r);
 	}
 
-<<<<<<< HEAD
 	@GetMapping("/findById")
 	public Rutas findById(@RequestParam String id){
 		Rutas r = RR.findById(id).orElse(null);
 		return r;
 	}
 
-	/*@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
-=======
 	@RequestMapping("/updateCiudad")
 	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad,ArrayList lista_puntos) {
->>>>>>> f25f1836c69b5d0a7bc47ad75940b738eb4e5187
 
 		Rutas r = RR.findById(id).orElse(null);
 
@@ -66,7 +61,7 @@ public class RutasController {
 		}
 
 		return r;
-	}*/
+	}
 
 	@GetMapping("/byId")
 	public Rutas getRuta(@RequestParam String id){
