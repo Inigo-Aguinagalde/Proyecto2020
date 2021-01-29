@@ -16,29 +16,34 @@ class Game extends StatefulWidget {
 }
 
 class _GameState extends State<Game> {
-  @override
-  Widget build(BuildContext context) {
-    int puntosLogrados = 0;
-    int localizaciones_realizadas = 0;
-    int localizaciones_totales = widget.ruta.lista_puntos.length;
-    double porcentaje_realizado = 0.00;
-    List<Localizaciones> listaLoca = List<Localizaciones>();
+  List<Localizaciones> listaLoca = List<Localizaciones>();
+  int puntosLogrados = 0;
+  int localizaciones_realizadas = 0;
+  int localizaciones_totales = 0;
+  double porcentaje_realizado = 0.00;
 
-    for (var i = 0; i < widget.ruta.lista_puntos.length; i++) {
-      fetchLoc(widget.ruta.lista_puntos[i].toString()).then((value) {
-        setState(() {
-          listaLoca.add(value);
-        });
+  initState() {
+    for (String loc in widget.ruta.lista_puntos) {
+      print("Localizcion1" + loc);
+      fetchLoc(loc).then((value) {
+        print("value" + value.toString());
+        listaLoca.add(value);
+        print("add" + value.toString());
       });
     }
+    localizaciones_totales = widget.ruta.lista_puntos.length;
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
         ),*/
       body: Stack(
         children: <Widget>[
-          Mapa(localizaciones: widget.ruta.lista_puntos),
+          Mapa(localizaciones: listaLoca),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
