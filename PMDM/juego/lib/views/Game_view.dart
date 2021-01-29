@@ -27,7 +27,7 @@ class _GameState extends State<Game> {
         ),*/
       body: Stack(
         children: <Widget>[
-          Mapa(widget.ruta.lista_puntos),
+          Mapa(localizaciones: widget.ruta.lista_puntos),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
@@ -38,7 +38,7 @@ class _GameState extends State<Game> {
                     animation: true,
                     lineHeight: 20.0,
                     animationDuration: 2000,
-                    percent: 0.10,
+                    percent: 0.20,
                     center: Text("Localizaciones ralizadas - " +
                         porcentaje_realizado.toString() +
                         "%"),
