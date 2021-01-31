@@ -50,8 +50,8 @@ public class RutasController {
 		return r;
 	}
 
-	/*@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
+	@RequestMapping("/updateCiudad")
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad, ArrayList<String>lista_puntos) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
