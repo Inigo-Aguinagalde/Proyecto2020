@@ -5,7 +5,6 @@ import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:juego/Models/Ruta.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
@@ -23,14 +22,7 @@ class _GameState extends State<Game> {
   double porcentaje_realizado = 0.00;
 
   initState() {
-    for (String loc in widget.ruta.lista_puntos) {
-      print("Localizcion1" + loc);
-      fetchLoc(loc).then((value) {
-        print("value" + value.toString());
-        listaLoca.add(value);
-        print("add" + value.toString());
-      });
-    }
+    getLocationData();
     localizaciones_totales = widget.ruta.lista_puntos.length;
     super.initState();
   }
@@ -156,5 +148,11 @@ class _GameState extends State<Game> {
         ],
       ),
     );
+  }
+
+  getLocationData(){
+  for (String loc in widget.ruta.lista_puntos) {
+      fetchLoc(loc).then((value) => listaLoca.add(value)as Map<String, dynamic>);
+    }
   }
 }

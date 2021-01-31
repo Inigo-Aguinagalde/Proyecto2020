@@ -16,7 +16,7 @@ class Mapa extends StatefulWidget {
 
 class _Mapa extends State<Mapa> {
   Position _currentPosition;
-  List<dynamic> data_list_loc;
+  Future<List<dynamic>> data_list_loc;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,6 @@ class _Mapa extends State<Mapa> {
       _controller.complete(controller);
     }
 
-    print(widget.localizaciones);
     if (_currentPosition == null) {
       return GoogleMap(
         onMapCreated: _onMapCreated,

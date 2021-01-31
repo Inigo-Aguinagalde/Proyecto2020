@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 
 Future<bool> login(String email, String password) async {
   bool acces = false;
-  final String url = 'http://10.0.2.2:8080/usuario/login?email=' +
+  final String url = 'http://192.168.1.119:8080/usuario/login?email=' +
       email +
       '&password=' +
       password;
