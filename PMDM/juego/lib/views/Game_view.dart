@@ -1,28 +1,158 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/Controller/LocalizacionesController.dart';
+import 'package:juego/Models/Localizaciones.dart';
+import 'package:juego/Models/Ruta.dart';
+import 'package:juego/widget/Map_widget.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
+// ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game({Key key}) : super(key: key);
-
+  Game({this.ruta, Key key}) : super(key: key);
+  Ruta ruta;
   @override
   _GameState createState() => _GameState();
 }
 
 class _GameState extends State<Game> {
+  List<Localizaciones> listaLoca = List<Localizaciones>();
+  int puntosLogrados = 0;
+  int localizaciones_realizadas = 0;
+  int localizaciones_totales = 0;
+  double porcentaje_realizado = 0.00;
+
+  initState() {
+    getLocationData();
+    localizaciones_totales = widget.ruta.lista_puntos.length;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Game"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text("Pagina game"),
-          ],
-        ),
+      /*appBar: AppBar(
+          title: Text("Game"),
+        ),*/
+      body: Stack(
+        children: <Widget>[
+          Mapa(localizaciones: listaLoca),
+          Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: new LinearPercentIndicator(
+                    width: MediaQuery.of(context).size.width - 50,
+                    animation: true,
+                    lineHeight: 20.0,
+                    animationDuration: 2000,
+                    percent: 0.10,
+                    center: Text("Localizaciones ralizadas - " +
+                        porcentaje_realizado.toString() +
+                        "%"),
+                    linearStrokeCap: LinearStrokeCap.roundAll,
+                    progressColor: Colors.green,
+                    backgroundColor: Colors.greenAccent[100],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 80,
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Puntos:", style: TextStyle(color: Colors.white)),
+                        Text(
+                          puntosLogrados.toString() +
+                              "/" +
+                              widget.ruta.puntos.toString(),
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    height: 80,
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          widget.ruta.nombre,
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.compare_arrows_rounded,
+                                  size: 20,
+                                ),
+                                Text(
+                                  widget.ruta.km.toString() + "-Km",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Icon(
+                                  Icons.hourglass_bottom,
+                                  size: 20,
+                                ),
+                                Text(
+                                  widget.ruta.duracion + "h",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 80,
+                    color: Colors.blue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Cronometro",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ])
+        ],
       ),
     );
+  }
+
+  getLocationData(){
+  for (String loc in widget.ruta.lista_puntos) {
+      fetchLoc(loc).then((value) => listaLoca.add(value)as Map<String, dynamic>);
+    }
   }
 }

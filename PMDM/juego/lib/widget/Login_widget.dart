@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LoginController.dart';
-import 'package:juego/Controller/Selection_route_Controller.dart';
 
-import 'package:juego/views/Route_selection_view.dart';
-import 'package:juego/widget/Post.dart';
+import '../views/Route_selection_view.dart';
 
 import '../views/Register_view.dart';
 
@@ -110,12 +108,11 @@ class _WidgetLogin extends State<WidgetLogin> {
                     await login(emailcontroller.text, passwordcontroller.text)
                         .then((value) {
                       if (value == true) {
-                        routeSelection();
                         print(value);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Post(),
+                            builder: (context) => RouteSelection(),
                           ),
                         );
                       }

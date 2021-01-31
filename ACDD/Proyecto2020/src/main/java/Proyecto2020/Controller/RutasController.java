@@ -39,13 +39,19 @@ public class RutasController {
 	@PostMapping("/añadir")
 	public Rutas añadirRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam ArrayList<String> lista_puntos,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
 
-		Rutas r = new Rutas(nombre,lista_puntos,duracion,ciudad,km,puntos);
+		Rutas r = new Rutas(nombre,ciudad, lista_puntos,duracion,ciudad,km,puntos);
 
 		return RR.save(r);
 	}
 
-	@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad,ArrayList lista_puntos) {
+	@GetMapping("/findById")
+	public Rutas findById(@RequestParam String id){
+		Rutas r = RR.findById(id).orElse(null);
+		return r;
+	}
+
+	/*@RequestMapping("/updateCiudad")
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
@@ -63,5 +69,8 @@ public class RutasController {
 
 		return r;
 	}
+
+
+
 
 }
