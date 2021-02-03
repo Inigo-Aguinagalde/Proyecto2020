@@ -6,6 +6,7 @@ class Ruta {
   String ciudad;
   String duracion;
   List<dynamic> lista_puntos;
+  List<dynamic> ranking;
   int puntos;
 
   Ruta({
@@ -26,5 +27,6 @@ class Ruta {
     km = json['km'];
     puntos = json['puntos'];
     lista_puntos = json['lista_puntos'];
+    ranking = json['ranking'];
   }
 }

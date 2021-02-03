@@ -6,6 +6,8 @@ import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import 'Chat_view.dart';
+
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
   Game({this.ruta, Key key}) : super(key: key);
@@ -134,9 +136,16 @@ class _GameState extends State<Game> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Cronometro",
-                          style: TextStyle(color: Colors.white),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Chat(),
+                              ),
+                            );
+                          },
+                          child: Icon(Icons.chat_outlined),
                         ),
                       ],
                     ),
@@ -150,9 +159,10 @@ class _GameState extends State<Game> {
     );
   }
 
-  getLocationData(){
-  for (String loc in widget.ruta.lista_puntos) {
-      fetchLoc(loc).then((value) => listaLoca.add(value)as Map<String, dynamic>);
+  getLocationData() {
+    for (String loc in widget.ruta.lista_puntos) {
+      fetchLoc(loc)
+          .then((value) => listaLoca.add(value) as Map<String, dynamic>);
     }
   }
 }
