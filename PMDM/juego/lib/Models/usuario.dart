@@ -11,7 +11,6 @@ class Usuario {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    password = json['password'];
     ruta_activa = json['ruta_activa'];
   }
 }

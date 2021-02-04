@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LoginController.dart';
 import 'package:juego/Models/usuario.dart';
-
 import '../views/Route_selection_view.dart';
-
 import '../views/Register_view.dart';
 
 class WidgetLogin extends StatefulWidget {
@@ -113,7 +111,8 @@ class _WidgetLogin extends State<WidgetLogin> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RouteSelection(user: value),
+                            builder: (context) =>
+                                RouteSelection(/*user: value*/),
                           ),
                         );
                       }

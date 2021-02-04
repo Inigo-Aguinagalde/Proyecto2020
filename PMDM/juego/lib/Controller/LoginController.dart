@@ -15,7 +15,9 @@ Future<Usuario> login(String email, String password) async {
   if (response.statusCode == 200) {
     if (response.body != null) {
       user = await json.decode(response.body);
-      return user;
+      print(user);
+      Usuario usuario = Usuario.fromJson(user);
+      return usuario;
     }
   } else {
     user = null;
