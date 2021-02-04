@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:juego/Models/Usuario.dart';
+import 'package:juego/Models/usuario.dart';
 
 Future<Usuario> login(String email, String password) async {
   var user;
