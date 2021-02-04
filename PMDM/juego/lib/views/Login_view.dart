@@ -28,9 +28,10 @@ class _Login extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                  alignment: Alignment.center,
-                  color: Colors.grey[100].withOpacity(0.7),
-                  child: WidgetLogin())
+                alignment: Alignment.center,
+                color: Colors.grey[100].withOpacity(0.7),
+                child: WidgetLogin(),
+              )
             ],
           ),
         ),

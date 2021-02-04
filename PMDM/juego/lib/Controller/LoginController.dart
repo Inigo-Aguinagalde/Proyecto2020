@@ -1,7 +1,10 @@
-import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-Future<bool> login(String email, String password) async {
-  bool acces = false;
+import 'package:http/http.dart' as http;
+import 'package:juego/Models/Usuario.dart';
+
+Future<Usuario> login(String email, String password) async {
+  var user;
   final String url = 'http://10.10.12.133:8080/usuario/login?email=' +
       email +
       '&password=' +
@@ -10,18 +13,16 @@ Future<bool> login(String email, String password) async {
   final response = await http.get('$url');
   print(response.statusCode);
   if (response.statusCode == 200) {
-    if (response.body == 'true') {
-      acces = true;
-    } else {
-      print("No esta registrado");
-      acces = false;
+    if (response.body != null) {
+      user = await json.decode(response.body);
+      return user;
     }
   } else {
+    user = null;
     print("Error de conexion con la api, estado:" +
         response.statusCode.toString());
-    acces = false;
   }
-  return acces;
+  return user;
 }
 
 Future<bool> registro(String email, String password, String username) async {

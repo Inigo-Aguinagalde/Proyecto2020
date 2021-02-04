@@ -5,7 +5,6 @@ import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
 import 'Chat_view.dart';
 
 // ignore: must_be_immutable
@@ -72,9 +71,9 @@ class _GameState extends State<Game> {
                       children: [
                         Text("Puntos:", style: TextStyle(color: Colors.white)),
                         Text(
-                          puntosLogrados.toString() +
+                          puntosLogrados.toInt().toString() +
                               "/" +
-                              widget.ruta.puntos.toString(),
+                              widget.ruta.puntos.toInt().toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ],
@@ -137,6 +136,9 @@ class _GameState extends State<Game> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blueGrey,
+                          ),
                           onPressed: () {
                             Navigator.push(
                               context,

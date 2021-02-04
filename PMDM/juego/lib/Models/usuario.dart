@@ -1,31 +1,17 @@
-class Users {
+class Usuario {
+  String id;
   String name;
   String email;
   String password;
+  String ruta_activa;
 
-  Users({this.name, this.email, this.password});
+  Usuario({this.name, this.email, this.password, this.ruta_activa});
 
-  set setusername(String newname) {
-    this.name = newname;
-  }
-
-  set setemail(String newemail) {
-    this.name = newemail;
-  }
-
-  set setpassword(String newpassword) {
-    this.password = newpassword;
-  }
-
-  String get getname {
-    return name;
-  }
-
-  String get getemail {
-    return email;
-  }
-
-  String get getpassword {
-    return password;
+  Usuario.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    email = json['email'];
+    password = json['password'];
+    ruta_activa = json['ruta_activa'];
   }
 }

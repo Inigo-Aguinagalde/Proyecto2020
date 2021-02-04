@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Models/Ruta.dart';
+import 'package:juego/Models/usuario.dart';
 import 'package:juego/views/Game_view.dart';
 
 class RouteSelection extends StatefulWidget {
-  const RouteSelection({Key key}) : super(key: key);
+  RouteSelection({this.user, Key key}) : super(key: key);
+  Usuario user;
   _WidgetRoute createState() => _WidgetRoute();
 }
 
 class _WidgetRoute extends State<RouteSelection> {
   List<Ruta> _rutas = List<Ruta>();
+  Usuario usuario;
 
   @override
   Widget build(BuildContext context) {
     fetchRuta().then((value) {
       setState(() {
         _rutas.addAll(value);
+        usuario = widget.user as Usuario;
       });
     });
 
@@ -26,14 +30,13 @@ class _WidgetRoute extends State<RouteSelection> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Seleccion de rutas'),
+          title: Text('Selección de rutas'),
         ),
         body: ListView.builder(
           itemBuilder: (context, index) {
             return Card(
-                margin: const EdgeInsets.only(
-                    top: 32, left: 16, right: 18),
-                    color: Colors.blue[50],
+                margin: const EdgeInsets.only(top: 32, left: 16, right: 18),
+                color: Colors.blue[50],
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -50,6 +53,7 @@ class _WidgetRoute extends State<RouteSelection> {
                     IconButton(
                       icon: Icon(Icons.check),
                       onPressed: () {
+                        cargarRuta(_rutas[index].id);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -65,4 +69,6 @@ class _WidgetRoute extends State<RouteSelection> {
       ),
     );
   }
+
+  void cargarRuta(String id) {}
 }
