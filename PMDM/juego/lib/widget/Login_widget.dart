@@ -111,8 +111,7 @@ class _WidgetLogin extends State<WidgetLogin> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                RouteSelection(/*user: value*/),
+                            builder: (context) => RouteSelection(user: value),
                           ),
                         );
                       }

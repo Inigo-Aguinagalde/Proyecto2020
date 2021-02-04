@@ -5,6 +5,7 @@ import 'package:juego/Models/usuario.dart';
 
 Future<Usuario> login(String email, String password) async {
   var user;
+  Usuario usuario = null;
   final String url = 'http://10.10.12.133:8080/usuario/login?email=' +
       email +
       '&password=' +
@@ -15,16 +16,16 @@ Future<Usuario> login(String email, String password) async {
   if (response.statusCode == 200) {
     if (response.body != null) {
       user = await json.decode(response.body);
-      print(user);
-      Usuario usuario = Usuario.fromJson(user);
-      return usuario;
+      usuario = Usuario.fromJson(user);
+    } else {
+      return null;
     }
   } else {
-    user = null;
+    usuario = null;
     print("Error de conexion con la api, estado:" +
         response.statusCode.toString());
   }
-  return user;
+  return usuario;
 }
 
 Future<bool> registro(String email, String password, String username) async {

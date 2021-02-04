@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:juego/Models/usuario.dart';
+import 'package:juego/Models/Usuario.dart';
 import 'package:http/http.dart' as http;
 
 Future<Usuario> updateRutaActiva(String id) async {

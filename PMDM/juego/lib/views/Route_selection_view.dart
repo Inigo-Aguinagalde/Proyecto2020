@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Models/Ruta.dart';
-import 'package:juego/Models/Usuario.dart';
 import 'package:juego/Models/usuario.dart';
 import 'package:juego/views/Game_view.dart';
 
@@ -13,12 +12,14 @@ class RouteSelection extends StatefulWidget {
 
 class _WidgetRoute extends State<RouteSelection> {
   List<Ruta> _rutas = List<Ruta>();
+  Usuario loged_user;
 
   @override
   Widget build(BuildContext context) {
     fetchRuta().then((value) {
       setState(() {
         _rutas.addAll(value);
+        loged_user = widget.user;
       });
     });
 
@@ -29,7 +30,7 @@ class _WidgetRoute extends State<RouteSelection> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(""),
+          title: Text(loged_user.ruta_activa),
         ),
         body: ListView.builder(
           itemBuilder: (context, index) {
