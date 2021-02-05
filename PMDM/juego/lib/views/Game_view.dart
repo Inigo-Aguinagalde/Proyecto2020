@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
-import 'package:juego/Models/Usuario.dart';
+import 'package:juego/Models/Usuarios.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'Chat_view.dart';
@@ -32,7 +32,7 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
         ),*/
@@ -42,20 +42,35 @@ class _GameState extends State<Game> {
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: new LinearPercentIndicator(
-                    width: MediaQuery.of(context).size.width - 50,
-                    animation: true,
-                    lineHeight: 20.0,
-                    animationDuration: 2000,
-                    percent: 0.10,
-                    center: Text("Localizaciones ralizadas - " +
-                        porcentaje_realizado.toString() +
-                        "%"),
-                    linearStrokeCap: LinearStrokeCap.roundAll,
-                    progressColor: Colors.green,
-                    backgroundColor: Colors.greenAccent[100],
+                Expanded(
+                  flex: 6,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: new LinearPercentIndicator(
+                      animation: true,
+                      lineHeight: 20.0,
+                      animationDuration: 2000,
+                      percent: 0.10,
+                      center: Text("Realizado - " +
+                          porcentaje_realizado.toString() +
+                          "%"),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: Colors.green,
+                      backgroundColor: Colors.greenAccent[100],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.all(2.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {},
+                      child: Icon(Icons.cancel),
+                    ),
                   ),
                 ),
               ],
