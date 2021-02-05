@@ -107,7 +107,6 @@ class _WidgetLogin extends State<WidgetLogin> {
                     await login(emailcontroller.text, passwordcontroller.text)
                         .then((value) {
                       if (value != null) {
-                        print(value);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
