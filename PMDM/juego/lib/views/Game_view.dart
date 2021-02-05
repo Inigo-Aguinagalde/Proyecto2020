@@ -39,6 +39,7 @@ class _GameState extends State<Game> {
       body: Stack(
         children: <Widget>[
           Mapa(localizaciones: listaLoca),
+          Text(listaLoca.length.toString()),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
@@ -180,8 +181,9 @@ class _GameState extends State<Game> {
 
   getLocationData() {
     for (String loc in widget.ruta.lista_puntos) {
-      fetchLoc(loc)
-          .then((value) => listaLoca.add(value) as Map<String, dynamic>);
+      fetchLoc(loc).then((value) {
+        listaLoca.add(value);
+      });
     }
   }
 }
