@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
-import 'package:juego/Models/usuario.dart';
+import 'package:juego/Models/Usuario.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'Chat_view.dart';

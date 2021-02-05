@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Ruta.dart';
-import 'package:juego/Models/usuario.dart';
+import 'package:juego/Models/Usuario.dart';
 import 'package:juego/views/Game_view.dart';
 
 class RouteSelection extends StatefulWidget {
