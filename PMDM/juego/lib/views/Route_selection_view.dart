@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/RouteController.dart';
+import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Ruta.dart';
-import 'package:juego/Models/usuario.dart';
+import 'package:juego/Models/Usuario.dart';
 import 'package:juego/views/Game_view.dart';
 
 class RouteSelection extends StatefulWidget {
@@ -16,10 +17,12 @@ class _WidgetRoute extends State<RouteSelection> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      loged_user = widget.user;
+    });
     fetchRuta().then((value) {
       setState(() {
         _rutas.addAll(value);
-        loged_user = widget.user;
       });
     });
 
@@ -30,7 +33,7 @@ class _WidgetRoute extends State<RouteSelection> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(loged_user.ruta_activa),
+          title: Text(loged_user.name),
         ),
         body: ListView.builder(
           itemBuilder: (context, index) {
@@ -51,16 +54,21 @@ class _WidgetRoute extends State<RouteSelection> {
                     Text('Duracion:' + _rutas[index].duracion + 'h'),
                     // ignore: missing_required_param
                     IconButton(
-                      icon: Icon(Icons.check),
-                      onPressed: () {
-                        cargarRuta(_rutas[index].id);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Game(ruta: _rutas[index])),
-                        );
-                      },
-                    ),
+                        icon: Icon(Icons.check),
+                        onPressed: () {
+                          updateRutaActiva(_rutas[index].id, widget.user.id)
+                              .then((value) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Game(
+                                  ruta: _rutas[index],
+                                  user: value,
+                                ),
+                              ),
+                            );
+                          });
+                        }),
                   ],
                 ));
           },
@@ -69,6 +77,4 @@ class _WidgetRoute extends State<RouteSelection> {
       ),
     );
   }
-
-  void cargarRuta(String id) {}
 }

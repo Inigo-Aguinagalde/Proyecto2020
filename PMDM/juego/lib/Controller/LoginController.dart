@@ -12,13 +12,10 @@ Future<Usuario> login(String email, String password) async {
       password;
 
   final response = await http.get('$url');
-  print(response.statusCode);
   if (response.statusCode == 200) {
     if (response.body != null) {
       user = await json.decode(response.body);
       usuario = Usuario.fromJson(user);
-    } else {
-      return null;
     }
   } else {
     usuario = null;

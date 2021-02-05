@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
+import 'package:juego/Models/usuario.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'Chat_view.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game({this.ruta, Key key}) : super(key: key);
+  Game({this.ruta, this.user, Key key}) : super(key: key);
   Ruta ruta;
+  Usuario user;
   @override
   _GameState createState() => _GameState();
 }
