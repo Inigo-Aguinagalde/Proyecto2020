@@ -1,27 +1,28 @@
-import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-Future<bool> login(String email, String password) async {
-  bool acces = false;
-  final String url = 'http://192.168.1.119:8080/usuario/login?email=' +
+import 'package:http/http.dart' as http;
+import 'package:juego/Models/Usuarios.dart';
+
+Future<Usuario> login(String email, String password) async {
+  var user;
+  Usuario usuario = null;
+  final String url = 'http://10.10.12.133:8080/usuario/login?email=' +
       email +
       '&password=' +
       password;
 
   final response = await http.get('$url');
-  print(response.statusCode);
   if (response.statusCode == 200) {
-    if (response.body == 'true') {
-      acces = true;
-    } else {
-      print("No esta registrado");
-      acces = false;
+    if (response.body != null) {
+      user = await json.decode(response.body);
+      usuario = Usuario.fromJson(user);
     }
   } else {
+    usuario = null;
     print("Error de conexion con la api, estado:" +
         response.statusCode.toString());
-    acces = false;
   }
-  return acces;
+  return usuario;
 }
 
 Future<bool> registro(String email, String password, String username) async {

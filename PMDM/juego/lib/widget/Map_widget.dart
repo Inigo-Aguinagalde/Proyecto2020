@@ -1,25 +1,38 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
-import 'package:juego/Controller/LocalizacionesController.dart';
+import 'package:juego/Models/Localizaciones.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
   Mapa({this.localizaciones, Key key}) : super(key: key);
-  List<dynamic> localizaciones;
+  List<Localizaciones> localizaciones;
 
   @override
   _Mapa createState() => _Mapa();
 }
 
 class _Mapa extends State<Mapa> {
+  Set<Marker> _markers;
   Position _currentPosition;
-  Future<List<dynamic>> data_list_loc;
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      for (Localizaciones loc in widget.localizaciones) {
+        _markers.add(
+          Marker(
+            markerId: MarkerId(loc.id),
+            position: LatLng(loc.latitud, loc.longitud),
+            infoWindow: InfoWindow(title: loc.nombre),
+          ),
+        );
+      }
+    });
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
@@ -31,6 +44,7 @@ class _Mapa extends State<Mapa> {
 
     if (_currentPosition == null) {
       return GoogleMap(
+        markers: _markers,
         onMapCreated: _onMapCreated,
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
@@ -41,6 +55,7 @@ class _Mapa extends State<Mapa> {
       );
     } else {
       return GoogleMap(
+        markers: _markers,
         onMapCreated: _onMapCreated,
         myLocationEnabled: true,
         myLocationButtonEnabled: true,

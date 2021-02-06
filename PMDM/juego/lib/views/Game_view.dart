@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
+import 'package:juego/Models/Usuarios.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'Chat_view.dart';
 
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
-  Game({this.ruta, Key key}) : super(key: key);
+  Game({this.ruta, this.user, Key key}) : super(key: key);
   Ruta ruta;
+  Usuario user;
   @override
   _GameState createState() => _GameState();
 }
@@ -29,30 +32,46 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
         ),*/
       body: Stack(
         children: <Widget>[
           Mapa(localizaciones: listaLoca),
+          Text(listaLoca.length.toString()),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: new LinearPercentIndicator(
-                    width: MediaQuery.of(context).size.width - 50,
-                    animation: true,
-                    lineHeight: 20.0,
-                    animationDuration: 2000,
-                    percent: 0.10,
-                    center: Text("Localizaciones ralizadas - " +
-                        porcentaje_realizado.toString() +
-                        "%"),
-                    linearStrokeCap: LinearStrokeCap.roundAll,
-                    progressColor: Colors.green,
-                    backgroundColor: Colors.greenAccent[100],
+                Expanded(
+                  flex: 6,
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: new LinearPercentIndicator(
+                      animation: true,
+                      lineHeight: 20.0,
+                      animationDuration: 2000,
+                      percent: 0.10,
+                      center: Text("Realizado - " +
+                          porcentaje_realizado.toString() +
+                          "%"),
+                      linearStrokeCap: LinearStrokeCap.roundAll,
+                      progressColor: Colors.green,
+                      backgroundColor: Colors.greenAccent[100],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: EdgeInsets.all(2.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.red,
+                      ),
+                      onPressed: () {},
+                      child: Icon(Icons.cancel),
+                    ),
                   ),
                 ),
               ],
@@ -70,9 +89,9 @@ class _GameState extends State<Game> {
                       children: [
                         Text("Puntos:", style: TextStyle(color: Colors.white)),
                         Text(
-                          puntosLogrados.toString() +
+                          puntosLogrados.toInt().toString() +
                               "/" +
-                              widget.ruta.puntos.toString(),
+                              widget.ruta.puntos.toInt().toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ],
@@ -134,9 +153,19 @@ class _GameState extends State<Game> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Cronometro",
-                          style: TextStyle(color: Colors.white),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blueGrey,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Chat(),
+                              ),
+                            );
+                          },
+                          child: Icon(Icons.chat_outlined),
                         ),
                       ],
                     ),
@@ -150,9 +179,11 @@ class _GameState extends State<Game> {
     );
   }
 
-  getLocationData(){
-  for (String loc in widget.ruta.lista_puntos) {
-      fetchLoc(loc).then((value) => listaLoca.add(value)as Map<String, dynamic>);
+  getLocationData() {
+    for (String loc in widget.ruta.lista_puntos) {
+      fetchLoc(loc).then((value) {
+        listaLoca.add(value);
+      });
     }
   }
 }

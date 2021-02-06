@@ -1,7 +1,7 @@
 class Localizaciones {
   String id;
-  String latitud;
-  String longitud;
+  double latitud;
+  double longitud;
   String nombre;
   String pregunta;
   String respuesta1;
@@ -20,8 +20,8 @@ class Localizaciones {
       this.respuesta3,
       this.solucion});
 
-  Localizaciones.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  Localizaciones.fromJson(Map<String, dynamic> json, id) {
+    id = id;
     nombre = json['nombre'];
     latitud = json['latitud'];
     longitud = json['longitud'];

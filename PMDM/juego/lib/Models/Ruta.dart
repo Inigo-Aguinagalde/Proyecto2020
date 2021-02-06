@@ -1,12 +1,12 @@
 class Ruta {
   String id;
-
-  int km;
+  double km;
   String nombre;
   String ciudad;
   String duracion;
   List<dynamic> lista_puntos;
-  int puntos;
+  List<Object> ranking;
+  double puntos;
 
   Ruta({
     this.km,
@@ -16,6 +16,7 @@ class Ruta {
     this.duracion,
     this.lista_puntos,
     this.puntos,
+    this.ranking,
   });
 
   Ruta.fromJson(Map<String, dynamic> json) {
@@ -26,5 +27,6 @@ class Ruta {
     km = json['km'];
     puntos = json['puntos'];
     lista_puntos = json['lista_puntos'];
+    ranking = json['ranking'];
   }
 }

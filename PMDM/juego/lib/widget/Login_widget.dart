@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LoginController.dart';
-
 import '../views/Route_selection_view.dart';
-
 import '../views/Register_view.dart';
 
 class WidgetLogin extends StatefulWidget {
@@ -107,12 +105,11 @@ class _WidgetLogin extends State<WidgetLogin> {
                   onPressed: () async {
                     await login(emailcontroller.text, passwordcontroller.text)
                         .then((value) {
-                      if (value == true) {
-                        print(value);
+                      if (value != null) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RouteSelection(),
+                            builder: (context) => RouteSelection(user: value),
                           ),
                         );
                       }
