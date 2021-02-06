@@ -6,10 +6,14 @@ import 'package:juego/Models/Usuarios.dart';
 Future<Usuario> login(String email, String password) async {
   var user;
   Usuario usuario = null;
-  final String url = 'http://10.10.12.133:8080/usuario/login?email=' +
+  /*final String url = 'http://10.10.12.133:8080/usuario/login?email=' +
       email +
       '&password=' +
-      password;
+      password;*/
+  final String url = 'http://192.168.1.119:8080/usuario/login?email=' +
+    email +
+    '&password=' +
+    password; 
 
   final response = await http.get('$url');
   if (response.statusCode == 200) {

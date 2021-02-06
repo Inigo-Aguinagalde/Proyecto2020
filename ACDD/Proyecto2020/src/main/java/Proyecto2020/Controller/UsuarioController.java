@@ -65,20 +65,19 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/login")
-	public @ResponseBody boolean username(@RequestParam String email ,@RequestParam String password){
+	public @ResponseBody Usuarios username(@RequestParam String email ,@RequestParam String password){
 
 		Usuarios s = RR.findByEmail(email).orElse(null);
-		boolean login = false;
-
-		if(s==null){
-			login=false;
-		}else{
+		Usuarios s_vuelta = null;
+		if(s!=null){
 			if(s.getPassword().equals(password)){
-				login=true;
+				s_vuelta.setEmail(s.getEmail());
+				s_vuelta.setId(s.getId());
+				s_vuelta.setName(s.getName());
 			}
 		}
 
-		return login;
+		return s_vuelta;
 	}
 
 	@RequestMapping("/loginAdmin")
