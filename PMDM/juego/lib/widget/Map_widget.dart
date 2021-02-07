@@ -16,11 +16,11 @@ class Mapa extends StatefulWidget {
 
 class _Mapa extends State<Mapa> {
   Set<Marker> _markers = new Set<Marker>();
-  Position _currentPosition;
+  Position _currentPosition ;
 
   @override
   void initState() {
-    _getCurrentLocation();
+      _getCurrentLocation();
     super.initState();
   }
 
@@ -34,10 +34,74 @@ class _Mapa extends State<Mapa> {
               markerId: MarkerId(loc.id),
               position: LatLng(loc.latitud, loc.longitud),
               infoWindow: InfoWindow(title: loc.nombre),
+              onTap: (){
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text(loc.pregunta),
+                      content: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded( 
+                                  child:ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueGrey,
+                                    ),
+                                    onPressed: () {
+                                      
+                                    },
+                                    child: Text(loc.respuesta1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded( 
+                                  child:ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueGrey,
+                                    ),
+                                    onPressed: () {
+                                      
+                                    },
+                                    child: Text(loc.respuesta2),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded( 
+                                  child:ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blueGrey,
+                                    ),
+                                    onPressed: () {
+                                      
+                                    },
+                                    child: Text(loc.respuesta3),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
             ),
           );
         });
-    };
+    }
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -48,37 +112,24 @@ class _Mapa extends State<Mapa> {
       _controller.complete(controller);
     }
 
-    /*if (_currentPosition == null) {
-      return GoogleMap(
-        markers: _markers,
-        onMapCreated: _onMapCreated,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(43.346868, -1.796799),
-          zoom: 15,
-        ),
-      );
-    } else {*/
-      return GoogleMap(
-        markers: _markers,
-        onMapCreated: _onMapCreated,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        initialCameraPosition: CameraPosition(
-          target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-          zoom: 15,
-        ),
-      );
-    //}
+    return GoogleMap(
+      markers: _markers,
+      onMapCreated: _onMapCreated,
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
+      initialCameraPosition: CameraPosition(
+        target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        zoom: 15,
+      ),
+    );
   }
 
-  _getCurrentLocation() {
+  _getCurrentLocation(){
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 
     geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        .then((Position position) {
+        .then((Position position){
       setState(() {
         _currentPosition = position;
         print("lat:" +
@@ -90,5 +141,9 @@ class _Mapa extends State<Mapa> {
       print(e);
     });
     print(_currentPosition);
+  }
+
+  _contestacionPregunta(){
+    
   }
 }
