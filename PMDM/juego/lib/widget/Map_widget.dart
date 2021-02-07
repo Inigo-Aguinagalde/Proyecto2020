@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,9 +19,14 @@ class _Mapa extends State<Mapa> {
   Position _currentPosition;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    _getCurrentLocation();
+    super.initState();
+  }
 
-    
+  @override
+  Widget build(BuildContext context) {
+ 
     for (Localizaciones loc in widget.localizaciones) {
         setState(() {
           _markers.add(
@@ -34,7 +38,7 @@ class _Mapa extends State<Mapa> {
           );
         });
     };
-    
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
@@ -44,7 +48,7 @@ class _Mapa extends State<Mapa> {
       _controller.complete(controller);
     }
 
-    if (_currentPosition == null) {
+    /*if (_currentPosition == null) {
       return GoogleMap(
         markers: _markers,
         onMapCreated: _onMapCreated,
@@ -55,7 +59,7 @@ class _Mapa extends State<Mapa> {
           zoom: 15,
         ),
       );
-    } else {
+    } else {*/
       return GoogleMap(
         markers: _markers,
         onMapCreated: _onMapCreated,
@@ -66,7 +70,7 @@ class _Mapa extends State<Mapa> {
           zoom: 15,
         ),
       );
-    }
+    //}
   }
 
   _getCurrentLocation() {
