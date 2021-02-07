@@ -39,6 +39,7 @@ class _Mapa extends State<Mapa> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
+                      backgroundColor: Colors.blueAccent[100],
                       title: Text("¿"+loc.pregunta),
                       content: SingleChildScrollView(
                         child: Column(
