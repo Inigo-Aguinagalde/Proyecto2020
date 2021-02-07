@@ -21,14 +21,14 @@ public class Rutas {
 
 	private String ciudad;
 
-	private int km;
+	private double km;
 
-	private int puntos;
+	private double puntos;
 
 	private String descripcion;
 
 
-	public Rutas(String id, String nombre, ArrayList lista_puntos,String duracion, String ciudad, int km, int puntos) {
+	public Rutas(String id, String nombre, ArrayList lista_puntos,String duracion, String ciudad, double km, double puntos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -45,7 +45,7 @@ public class Rutas {
 		super();
 	}
 
-	public Rutas(String nombre, ArrayList lista_puntos, String duracion, String ciudad, int km, int puntos,String descripcion) {
+	public Rutas(String nombre, ArrayList lista_puntos, String duracion, String ciudad, double km, double puntos,String descripcion) {
 		this.nombre=nombre;
 		this.lista_puntos=lista_puntos;
 		this.duracion=duracion;
@@ -106,19 +106,19 @@ public class Rutas {
 		this.lista_puntos = lista_puntos;
 	}
 
-	public int getKm() {
+	public double getKm() {
 		return km;
 	}
 
-	public void setKm(int km) {
+	public void setKm(double km) {
 		this.km = km;
 	}
 
-	public int getPuntos() {
+	public double getPuntos() {
 		return puntos;
 	}
 
-	public void setPuntos(int puntos) {
+	public void setPuntos(double puntos) {
 		this.puntos = puntos;
 	}
 

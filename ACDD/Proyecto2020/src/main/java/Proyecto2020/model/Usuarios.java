@@ -23,6 +23,9 @@ public class Usuarios {
 		this.password = password;
 		this.email= email;
 	}
+	
+	public Usuarios() {
+	}
 
 	public String getId() {
 		return id;

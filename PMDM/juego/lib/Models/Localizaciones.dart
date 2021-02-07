@@ -20,8 +20,8 @@ class Localizaciones {
       this.respuesta3,
       this.solucion});
 
-  Localizaciones.fromJson(Map<String, dynamic> json, id) {
-    id = id;
+  Localizaciones.fromJson(Map<String, dynamic> json, id_entrante) {
+    id = id_entrante;
     nombre = json['nombre'];
     latitud = json['latitud'];
     longitud = json['longitud'];

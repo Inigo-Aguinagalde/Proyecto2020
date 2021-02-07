@@ -68,7 +68,7 @@ public class UsuarioController {
 	public @ResponseBody Usuarios username(@RequestParam String email ,@RequestParam String password){
 
 		Usuarios s = RR.findByEmail(email).orElse(null);
-		Usuarios s_vuelta = null;
+		Usuarios s_vuelta = new Usuarios();
 		if(s!=null){
 			if(s.getPassword().equals(password)){
 				s_vuelta.setEmail(s.getEmail());

@@ -16,23 +16,25 @@ class Mapa extends StatefulWidget {
 }
 
 class _Mapa extends State<Mapa> {
-  Set<Marker> _markers;
+  Set<Marker> _markers = new Set<Marker>();
   Position _currentPosition;
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      for (Localizaciones loc in widget.localizaciones) {
-        _markers.add(
-          Marker(
-            markerId: MarkerId(loc.id),
-            position: LatLng(loc.latitud, loc.longitud),
-            infoWindow: InfoWindow(title: loc.nombre),
-          ),
-        );
-      }
-    });
 
+    
+    for (Localizaciones loc in widget.localizaciones) {
+        setState(() {
+          _markers.add(
+            Marker(
+              markerId: MarkerId(loc.id),
+              position: LatLng(loc.latitud, loc.longitud),
+              infoWindow: InfoWindow(title: loc.nombre),
+            ),
+          );
+        });
+    };
+    
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));

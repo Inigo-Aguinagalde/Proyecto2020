@@ -9,8 +9,8 @@ public class Localizaciones {
 	@Id
 	private String _id;
 
-	private String latitud;
-	private String longitud;
+	private double latitud;
+	private double longitud;
 	private String nombre;
 	private String pregunta;
 	private String respuesta1;
@@ -18,7 +18,7 @@ public class Localizaciones {
 	private String respuesta3;
 	private int solucion;
 
-	public Localizaciones(String id, String latitud, String longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion) {
+	public Localizaciones(String id, double latitud, double longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion) {
 		super();
 		this._id = id;
 		this.latitud = latitud;
@@ -34,19 +34,19 @@ public class Localizaciones {
 	public Localizaciones(){
 		super();
 	}
-	public String getLatitud() {
+	public double getLatitud() {
 		return latitud;
 	}
 
-	public void setLatitud(String latitud) {
+	public void setLatitud(double latitud) {
 		this.latitud = latitud;
 	}
 
-	public String getLongitud() {
+	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(String longitud) {
+	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
 
