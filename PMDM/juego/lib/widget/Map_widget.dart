@@ -39,7 +39,7 @@ class _Mapa extends State<Mapa> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text(loc.pregunta),
+                      title: Text("¿"+loc.pregunta),
                       content: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
@@ -52,7 +52,7 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      
+                                      _contestacionPregunta();
                                     },
                                     child: Text(loc.respuesta1),
                                   ),
@@ -68,7 +68,7 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      
+                                      _contestacionPregunta();
                                     },
                                     child: Text(loc.respuesta2),
                                   ),
@@ -84,7 +84,7 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      
+                                      _contestacionPregunta();
                                     },
                                     child: Text(loc.respuesta3),
                                   ),
@@ -144,6 +144,15 @@ class _Mapa extends State<Mapa> {
   }
 
   _contestacionPregunta(){
-    
+    /* 
+      Recibe dos variables la el numero de la respuesta (1,2,3) y el resultado correcto, Esta función las compara si es la respuesta correcta tendrá que subir el punto en el PROVIDER que hay que crear.
+
+    */
+  }
+
+  _cancelarRutaActiva(){
+    /* 
+      Este tendrá que eliminar al campo de Ruta activa de la BD del usuario logeado. Aparte de eso tendrá que eliminar los datos del provider.
+    */
   }
 }
