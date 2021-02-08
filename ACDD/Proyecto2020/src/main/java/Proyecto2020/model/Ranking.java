@@ -9,18 +9,17 @@ public class Ranking {
 	@Id
 	private String id;
 	
-	private int puntos;
+	private double puntos;
 	
-	private String id_usuarios;
+	private String idUsuarios;
 	
-	private String id_ruta;
+	private String idRuta;
 
-	public Ranking(String id, int puntos, String id_usuarios, String id_ruta) {
+	public Ranking(double puntos, String id_usuarios, String id_ruta) {
 		super();
-		this.id = id;
 		this.puntos = puntos;
-		this.id_usuarios = id_usuarios;
-		this.id_ruta = id_ruta;
+		this.idUsuarios = id_usuarios;
+		this.idRuta = id_ruta;
 	}
 
 	public Ranking() {
@@ -35,11 +34,11 @@ public class Ranking {
 		this.id = id;
 	}
 
-	public int getPuntos() {
+	public double getPuntos() {
 		return puntos;
 	}
 
-	public void setPuntos(int puntos) {
+	public void setPuntos(double puntos) {
 		this.puntos = puntos;
 	}
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Proyecto2020.Repository.RankingRepository;
 import Proyecto2020.model.Ranking;
+import Proyecto2020.model.Usuarios;
 
 
 @RequestMapping("/ranking")
@@ -29,10 +30,12 @@ public class  RankingController {
 	}
 	
 	@PostMapping("/añadir")
-	public  Ranking añadirPuntuacuin(@RequestBody Ranking r ) {
+	public  Ranking añadirPuntuacuin(@RequestParam double puntos,@RequestParam String id_usuario ,@RequestParam String id_ruta) {
 		
+		Ranking marca = new Ranking(puntos,id_usuario,id_ruta);
+		RR.save(marca);
 		
-		return RR.save(r);
+		return marca;
 	}
 	
 	@RequestMapping("/update")
@@ -51,4 +54,11 @@ public class  RankingController {
 		return r;
 	}
 	
+	@GetMapping("/getByRouteId")
+	public @ResponseBody List<Ranking> getByRouteID(@RequestParam String id_ruta){
+		
+		List<Ranking> lista_ranking = RR.findById_ruta(id_ruta);
+		
+		return lista_ranking;
+	}
 }

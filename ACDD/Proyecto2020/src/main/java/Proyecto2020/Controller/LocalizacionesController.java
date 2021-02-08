@@ -44,14 +44,14 @@ public class LocalizacionesController{
 	}
 
 	@RequestMapping("/update")
-	public @ResponseBody Localizaciones updateLocalizacion(@RequestParam String id,String latitud, String longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion ) {
+	public @ResponseBody Localizaciones updateLocalizacion(@RequestParam String id,double latitud, double longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion ) {
 
 		Localizaciones l = RR.findById(id).orElse(null);
 
-		if(latitud != null) {
+		if(latitud != 0) {
 			l.setLatitud(latitud);
 		}
-		if(longitud != null) {
+		if(longitud != 0) {
 			l.setLongitud(longitud);
 		}
 		if(nombre != null) {
