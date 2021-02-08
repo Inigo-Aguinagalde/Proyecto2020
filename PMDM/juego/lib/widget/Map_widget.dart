@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:juego/Controller/RankingController.dart';
 import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
@@ -196,7 +197,7 @@ class _Mapa extends State<Mapa> {
   _guardarPuntos() {
     double puntos =
         Provider.of<ContadorPuntos>(context, listen: false).getPuntos;
-    //addRankingUser(puntos, widget.ruta_id, widget.user_id);
+    addRegistro(puntos,widget.user_id,widget.ruta_id);
     deleteRutaActiva(widget.user_id);
   }
 }
