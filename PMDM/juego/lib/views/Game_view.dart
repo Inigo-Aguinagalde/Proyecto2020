@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
+import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
 import 'package:juego/Models/Usuarios.dart';
+import 'package:juego/Providers/ContadorPuntos.dart';
 import 'package:juego/widget/Map_widget.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'Chat_view.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +22,7 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   List<Localizaciones> listaLoca = List<Localizaciones>();
-  int puntosLogrados = 0;
+  double puntosLogrados = 0;
   int localizaciones_realizadas = 0;
   int localizaciones_totales = 0;
   double porcentaje_realizado = 0.00;
@@ -32,7 +35,7 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
         ),*/
@@ -69,7 +72,9 @@ class _GameState extends State<Game> {
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _cancelarRutaActiva(widget.user.id);
+                      },
                       child: Icon(Icons.cancel),
                     ),
                   ),
@@ -89,7 +94,9 @@ class _GameState extends State<Game> {
                       children: [
                         Text("Puntos:", style: TextStyle(color: Colors.white)),
                         Text(
-                          puntosLogrados.toInt().toString() +
+                          Provider.of<ContadorPuntos>(context)
+                                  .getCounter
+                                  .toString() +
                               "/" +
                               widget.ruta.puntos.toInt().toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white),
@@ -140,7 +147,7 @@ class _GameState extends State<Game> {
                               ],
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -185,5 +192,15 @@ class _GameState extends State<Game> {
         listaLoca.add(value);
       });
     }
+  }
+
+  _cancelarRutaActiva(String id) {
+    Navigator.pop(context);
+    deleteRutaActiva(id).then((value) => setState(() => widget.user = value));
+    print(widget.user.ruta_activa);
+    Provider.of<ContadorPuntos>(context, listen: false).resetCounter();
+    /* 
+      Este tendrá que eliminar al campo de Ruta activa de la BD del usuario logeado. Aparte de eso tendrá que eliminar los datos del provider.
+    */
   }
 }

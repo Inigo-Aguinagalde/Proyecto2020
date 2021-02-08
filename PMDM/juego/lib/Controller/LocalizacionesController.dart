@@ -3,10 +3,10 @@ import 'package:juego/Models/Localizaciones.dart';
 import 'package:http/http.dart' as http;
 
 Future<Localizaciones> fetchLoc(String id) async {
-  /*final response = await http
-      .get('http://10.10.12.133:8080/localizaciones/findByID?id=' + id);*/
   final response = await http
-      .get('http://192.168.1.119:8080/localizaciones/findByID?id=' + id);
+      .get('http://10.10.12.133:8080/localizaciones/findByID?id=' + id);
+  /*final response = await http
+      .get('http://192.168.1.119:8080/localizaciones/findByID?id=' + id);*/
   var loc;
   Localizaciones loc_vuelta;
   if (response.statusCode == 200) {

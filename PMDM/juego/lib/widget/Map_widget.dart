@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:juego/Controller/UserController.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:juego/Models/Localizaciones.dart';
+import 'package:juego/Providers/ContadorPuntos.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
@@ -16,44 +19,45 @@ class Mapa extends StatefulWidget {
 
 class _Mapa extends State<Mapa> {
   Set<Marker> _markers = new Set<Marker>();
-  Position _currentPosition ;
+  Position _currentPosition;
 
   @override
   void initState() {
-      _getCurrentLocation();
+    _getCurrentLocation();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
- 
     for (Localizaciones loc in widget.localizaciones) {
-        setState(() {
-          _markers.add(
-            Marker(
+      setState(() {
+        _markers.add(
+          Marker(
               markerId: MarkerId(loc.id),
               position: LatLng(loc.latitud, loc.longitud),
               infoWindow: InfoWindow(title: loc.nombre),
-              onTap: (){
+              onTap: () {
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
                       backgroundColor: Colors.blueAccent[100],
-                      title: Text("¿"+loc.pregunta),
+                      title: Text("¿" + loc.pregunta),
                       content: SingleChildScrollView(
                         child: Column(
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded( 
-                                  child:ElevatedButton(
+                                Expanded(
+                                  child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      _contestacionPregunta();
+                                      if (1 == loc.solucion) {
+                                        _contestacionPregunta(loc.id);
+                                      }
                                     },
                                     child: Text(loc.respuesta1),
                                   ),
@@ -63,13 +67,15 @@ class _Mapa extends State<Mapa> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded( 
-                                  child:ElevatedButton(
+                                Expanded(
+                                  child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      _contestacionPregunta();
+                                      if (2 == loc.solucion) {
+                                        _contestacionPregunta(loc.id);
+                                      }
                                     },
                                     child: Text(loc.respuesta2),
                                   ),
@@ -79,13 +85,15 @@ class _Mapa extends State<Mapa> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Expanded( 
-                                  child:ElevatedButton(
+                                Expanded(
+                                  child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      _contestacionPregunta();
+                                      if (3 == loc.solucion) {
+                                        _contestacionPregunta(loc.id);
+                                      }
                                     },
                                     child: Text(loc.respuesta3),
                                   ),
@@ -98,10 +106,9 @@ class _Mapa extends State<Mapa> {
                     );
                   },
                 );
-              }
-            ),
-          );
-        });
+              }),
+        );
+      });
     }
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -125,12 +132,12 @@ class _Mapa extends State<Mapa> {
     );
   }
 
-  _getCurrentLocation(){
+  _getCurrentLocation() {
     final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
 
     geolocator
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
-        .then((Position position){
+        .then((Position position) {
       setState(() {
         _currentPosition = position;
         print("lat:" +
@@ -144,16 +151,16 @@ class _Mapa extends State<Mapa> {
     print(_currentPosition);
   }
 
-  _contestacionPregunta(){
+  _contestacionPregunta(String id) {
+    String id_entrante = id;
+    Provider.of<ContadorPuntos>(context, listen: false).incrementCounter();
+    double puntos =
+        Provider.of<ContadorPuntos>(context, listen: false).getCounter;
+    print(puntos);
+
     /* 
       Recibe dos variables la el numero de la respuesta (1,2,3) y el resultado correcto, Esta función las compara si es la respuesta correcta tendrá que subir el punto en el PROVIDER que hay que crear.
 
-    */
-  }
-
-  _cancelarRutaActiva(){
-    /* 
-      Este tendrá que eliminar al campo de Ruta activa de la BD del usuario logeado. Aparte de eso tendrá que eliminar los datos del provider.
     */
   }
 }
