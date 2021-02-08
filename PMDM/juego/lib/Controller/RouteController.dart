@@ -16,3 +16,24 @@ Future<List<Ruta>> fetchRuta() async {
 
   return rutas;
 }
+
+Future<Ruta> addRankingUser(
+    double puntos, String id_ruta, String id_usuario) async {
+  final String url =
+      'http://10.10.12.133:8080/rutas/NuevoRegistroRanking?id_ruta=' +
+          id_ruta +
+          '&id_usuario=' +
+          id_usuario +
+          '&puntos_obtenidos=' +
+          puntos.toString();
+
+  final response = await http.post(url);
+  var ruta_vuelta;
+  if (response.statusCode == 200) {
+    var ruta = await json.decode(response.body);
+    List<dynamic> decoded = ruta;
+    ruta_vuelta = decoded.map<Ruta>((e) => Ruta.fromJson(e));
+  }
+
+  return ruta_vuelta;
+}

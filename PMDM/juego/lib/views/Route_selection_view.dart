@@ -60,7 +60,7 @@ class _WidgetRoute extends State<RouteSelection> {
                       IconButton(
                           icon: Icon(Icons.check),
                           onPressed: () {
-                            updateRutaActiva(_rutas[index].id, widget.user.id)
+                            updateRutaActiva(_rutas[index].id, loged_user.id)
                                 .then((value) {
                               Navigator.push(
                                 context,

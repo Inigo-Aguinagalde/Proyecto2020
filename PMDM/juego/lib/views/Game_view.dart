@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
+import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
@@ -41,7 +42,11 @@ class _GameState extends State<Game> {
         ),*/
       body: Stack(
         children: <Widget>[
-          Mapa(localizaciones: listaLoca),
+          Mapa(
+            localizaciones: listaLoca,
+            user_id: widget.user.id,
+            ruta_id: widget.ruta.id,
+          ),
           Text(listaLoca.length.toString()),
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
             Row(
@@ -56,7 +61,7 @@ class _GameState extends State<Game> {
                       animationDuration: 2000,
                       percent: porcentaje_realizado / 100,
                       center: Text("Realizado - " +
-                          porcentaje_realizado.toString() +
+                          porcentaje_realizado.toStringAsFixed(2) +
                           "%"),
                       linearStrokeCap: LinearStrokeCap.roundAll,
                       progressColor: Colors.green,

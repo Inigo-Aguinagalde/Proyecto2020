@@ -1,17 +1,23 @@
 import 'dart:async';
-import 'package:juego/Controller/UserController.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:juego/Controller/RouteController.dart';
+import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
+import 'package:juego/Models/Usuarios.dart';
 import 'package:juego/Providers/ContadorPuntos.dart';
 import 'package:provider/provider.dart';
+import 'package:juego/views/Game_view.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
-  Mapa({this.localizaciones, Key key}) : super(key: key);
+  Mapa({this.user_id, this.ruta_id, this.localizaciones, Key key})
+      : super(key: key);
   List<Localizaciones> localizaciones;
+  String user_id;
+  String ruta_id;
 
   @override
   _Mapa createState() => _Mapa();
@@ -156,9 +162,40 @@ class _Mapa extends State<Mapa> {
     Provider.of<ContadorPuntos>(context, listen: false)
         .setPorcentaje(widget.localizaciones.length);
     Navigator.of(context, rootNavigator: true).pop('dialog');
-    /* 
-      Recibe dos variables la el numero de la respuesta (1,2,3) y el resultado correcto, Esta función las compara si es la respuesta correcta tendrá que subir el punto en el PROVIDER que hay que crear.
+    int contestadas =
+        Provider.of<ContadorPuntos>(context, listen: false).getContestadas;
 
-    */
+    if (contestadas == widget.localizaciones.length) {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              backgroundColor: Colors.blueAccent[100],
+              title: Text("Felizidades!!! Has finalizado la ruta!!"),
+              content: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueGrey,
+                      ),
+                      onPressed: () {
+                        _guardarPuntos();
+                      },
+                      child: Text("Ranking"),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+  }
+
+  _guardarPuntos() {
+    double puntos =
+        Provider.of<ContadorPuntos>(context, listen: false).getPuntos;
+    //addRankingUser(puntos, widget.ruta_id, widget.user_id);
+    deleteRutaActiva(widget.user_id);
   }
 }
