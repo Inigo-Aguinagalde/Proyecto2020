@@ -44,6 +44,7 @@ class _Mapa extends State<Mapa> {
               infoWindow: InfoWindow(title: loc.nombre),
               onTap: () {
                 showDialog(
+                  barrierDismissible: false,
                   context: context,
                   builder: (context) {
                     return AlertDialog(
