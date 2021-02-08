@@ -55,9 +55,8 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      if (1 == loc.solucion) {
-                                        _contestacionPregunta(loc.id);
-                                      }
+                                      _contestacionPregunta(
+                                          loc.id, loc.solucion, 1);
                                     },
                                     child: Text(loc.respuesta1),
                                   ),
@@ -73,9 +72,8 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      if (2 == loc.solucion) {
-                                        _contestacionPregunta(loc.id);
-                                      }
+                                      _contestacionPregunta(
+                                          loc.id, loc.solucion, 2);
                                     },
                                     child: Text(loc.respuesta2),
                                   ),
@@ -91,9 +89,8 @@ class _Mapa extends State<Mapa> {
                                       primary: Colors.blueGrey,
                                     ),
                                     onPressed: () {
-                                      if (3 == loc.solucion) {
-                                        _contestacionPregunta(loc.id);
-                                      }
+                                      _contestacionPregunta(
+                                          loc.id, loc.solucion, 3);
                                     },
                                     child: Text(loc.respuesta3),
                                   ),
@@ -151,13 +148,14 @@ class _Mapa extends State<Mapa> {
     print(_currentPosition);
   }
 
-  _contestacionPregunta(String id) {
-    String id_entrante = id;
-    Provider.of<ContadorPuntos>(context, listen: false).incrementCounter();
-    double puntos =
-        Provider.of<ContadorPuntos>(context, listen: false).getCounter;
-    print(puntos);
-
+  _contestacionPregunta(String id, int correct, int resp) {
+    if (correct == resp) {
+      Provider.of<ContadorPuntos>(context, listen: false).incrementPuntos();
+    }
+    Provider.of<ContadorPuntos>(context, listen: false).increment_Cont();
+    Provider.of<ContadorPuntos>(context, listen: false)
+        .setPorcentaje(widget.localizaciones.length);
+    Navigator.of(context, rootNavigator: true).pop('dialog');
     /* 
       Recibe dos variables la el numero de la respuesta (1,2,3) y el resultado correcto, Esta función las compara si es la respuesta correcta tendrá que subir el punto en el PROVIDER que hay que crear.
 

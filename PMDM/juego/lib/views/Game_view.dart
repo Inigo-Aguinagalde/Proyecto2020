@@ -22,10 +22,7 @@ class Game extends StatefulWidget {
 
 class _GameState extends State<Game> {
   List<Localizaciones> listaLoca = List<Localizaciones>();
-  double puntosLogrados = 0;
-  int localizaciones_realizadas = 0;
   int localizaciones_totales = 0;
-  double porcentaje_realizado = 0.00;
 
   initState() {
     getLocationData();
@@ -35,6 +32,9 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
+    double puntosLogrados = Provider.of<ContadorPuntos>(context).getPuntos;
+    double porcentaje_realizado =
+        Provider.of<ContadorPuntos>(context).getPorcentaje;
     return Scaffold(
       /*appBar: AppBar(
           title: Text("Game"),
@@ -54,7 +54,7 @@ class _GameState extends State<Game> {
                       animation: true,
                       lineHeight: 20.0,
                       animationDuration: 2000,
-                      percent: 0.10,
+                      percent: porcentaje_realizado / 100,
                       center: Text("Realizado - " +
                           porcentaje_realizado.toString() +
                           "%"),
@@ -94,9 +94,7 @@ class _GameState extends State<Game> {
                       children: [
                         Text("Puntos:", style: TextStyle(color: Colors.white)),
                         Text(
-                          Provider.of<ContadorPuntos>(context)
-                                  .getCounter
-                                  .toString() +
+                          puntosLogrados.toInt().toString() +
                               "/" +
                               widget.ruta.puntos.toInt().toString(),
                           style: TextStyle(fontSize: 25, color: Colors.white),
@@ -197,8 +195,9 @@ class _GameState extends State<Game> {
   _cancelarRutaActiva(String id) {
     Navigator.pop(context);
     deleteRutaActiva(id).then((value) => setState(() => widget.user = value));
-    print(widget.user.ruta_activa);
-    Provider.of<ContadorPuntos>(context, listen: false).resetCounter();
+    Provider.of<ContadorPuntos>(context, listen: false).resetPuntos();
+    Provider.of<ContadorPuntos>(context, listen: false).reset_Cont();
+    Provider.of<ContadorPuntos>(context, listen: false).reset_Porc();
     /* 
       Este tendrá que eliminar al campo de Ruta activa de la BD del usuario logeado. Aparte de eso tendrá que eliminar los datos del provider.
     */
