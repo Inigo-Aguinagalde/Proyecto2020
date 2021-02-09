@@ -6,15 +6,17 @@ import 'dart:convert';
 import 'dart:io';
 
 class Chat_widget extends StatefulWidget {
-  const Chat_widget({Key key}) : super(key: key);
+  Chat_widget({Key key, this.usuario,this.ruta}) : super(key: key);
+  String usuario;
+  String ruta;
   _Chat_widget createState() => _Chat_widget();
 }
 
 class _Chat_widget extends State<Chat_widget> {
 
   //datos del servidor del chat
-  String localIP = "10.10.12.183";
-  //String localIP = "13.95.106.247";
+  //String localIP = "10.10.12.183";
+  String localIP = "192.168.1.119";
   int port = 1234;
   //int port = 443;
 
@@ -31,6 +33,8 @@ class _Chat_widget extends State<Chat_widget> {
 
   @override
   void initState() {
+    nick = widget.usuario;
+    ruta = widget.ruta;
     connectToServer();
   }
   
@@ -43,9 +47,7 @@ class _Chat_widget extends State<Chat_widget> {
           messageListArea(),
           submitArea(),
         ],
-       ),
-       
-       
+       ),  
     );
   }
 

@@ -4,8 +4,9 @@ import 'package:juego/widget/Chat_widget.dart';
 
 
 class Chat extends StatefulWidget {
-  Chat({Key key}) : super(key: key);
-
+  Chat({Key key, this.usuario,this.ruta}) : super(key: key);
+  String usuario;
+  String ruta;
   @override
   _Chat createState() => _Chat();
 }
@@ -20,7 +21,12 @@ class _Chat extends State<Chat> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[Chat_widget()],
+          children: <Widget>[
+            Chat_widget(
+              usuario:widget.usuario,
+              ruta:widget.ruta,
+            ),
+          ],
         ),
       ),
     );

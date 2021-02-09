@@ -170,7 +170,10 @@ class _GameState extends State<Game> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Chat(),
+                                builder: (context) => Chat(
+                                  usuario:widget.user.name,
+                                  ruta:widget.ruta.id,
+                                ),
                               ),
                             );
                           },
