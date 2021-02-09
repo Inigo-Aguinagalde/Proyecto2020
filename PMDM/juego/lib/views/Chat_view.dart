@@ -18,17 +18,10 @@ class _Chat extends State<Chat> {
       appBar: AppBar(
         title: Text("Chat"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Chat_widget(
+      body: Chat_widget(
               usuario:widget.usuario,
               ruta:widget.ruta,
             ),
-          ],
-        ),
-      ),
     );
   }
 }

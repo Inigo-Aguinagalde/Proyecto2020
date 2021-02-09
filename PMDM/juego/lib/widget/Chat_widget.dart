@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'dart:io';
 
 class Chat_widget extends StatefulWidget {
-  Chat_widget({Key key, this.usuario,this.ruta}) : super(key: key);
+  Chat_widget({Key key, this.usuario, this.ruta}) : super(key: key);
   String usuario;
   String ruta;
   _Chat_widget createState() => _Chat_widget();
