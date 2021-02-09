@@ -24,6 +24,8 @@ public class Usuarios {
 		this.name = name;
 		this.password = password;
 		this.email= email;
+		this.admin = false;
+		this.rutaActiva = "";
 	}
 
 	public Usuarios() {

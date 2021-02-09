@@ -18,9 +18,8 @@ public class Localizaciones {
 	private String respuesta3;
 	private int solucion;
 
-	public Localizaciones(String id, double latitud, double longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion) {
+	public Localizaciones(double latitud, double longitud,String nombre,String pregunta,String respuesta1,String respuesta2,String respuesta3,int solucion) {
 		super();
-		this._id = id;
 		this.latitud = latitud;
 		this.longitud = longitud;
 		this.nombre = nombre;

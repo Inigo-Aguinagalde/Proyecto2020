@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Proyecto2020.Repository.RankingRepository;
 import Proyecto2020.model.Ranking;
+import Proyecto2020.model.Rutas;
 import Proyecto2020.model.Usuarios;
 
 
@@ -23,14 +24,18 @@ public class  RankingController {
 	@Autowired
 	private RankingRepository RR;
 
+	///////		MOSTRAR TODAS LAS RUTAS DEL SISTEMA		////////
+	
 	@GetMapping("/todas")
 	public List<Ranking> getRanking(){
 
 		return RR.findAll();
 	}
 
-	@PostMapping("/añadir")
-	public  Ranking añadirPuntuacuin(@RequestParam double puntos,@RequestParam String id_usuario ,@RequestParam String id_ruta) {
+	///////		AÑADIR REGISTRO EN EL RANKING		////////
+	
+	@PostMapping("/add")
+	public  Ranking addPuntuacuin(@RequestParam double puntos,@RequestParam String id_usuario ,@RequestParam String id_ruta) {
 
 		Ranking marca = new Ranking(puntos,id_usuario,id_ruta);
 		RR.save(marca);
@@ -38,22 +43,25 @@ public class  RankingController {
 		return marca;
 	}
 
-	@RequestMapping("/update")
-	public @ResponseBody Ranking updateRanking(@RequestParam String id, int puntos, String id_usuarios , String id_ruta) {
-
+	///////		ELIMINAR REGISTRO DEL RANKING		////////
+	
+	@RequestMapping("/deleteRegistro")
+	public @ResponseBody String deleteRegistro(@RequestParam String id) {
+		String comprobacion;
 		Ranking r = RR.findById(id).orElse(null);
-
-		if(puntos==0) {
-			r.getPuntos();
-		}else if(id_usuarios==null) {
-			r.getId_usuarios();
-		}else if(id_ruta==null) {
-			r.getId_ruta();
+		RR.delete(r);
+		Ranking c = RR.findById(id).orElse(null);
+		if(c == null) {
+			comprobacion = "se ha eliminado";
+		}else {
+			comprobacion = "no se ha podido eliminar";
 		}
-
-		return r;
+		
+		return comprobacion;
 	}
 
+///////		LISTA DE REGISTROS POR RUTAS		////////
+	
 	@GetMapping("/getByRouteId")
 	public @ResponseBody List<Ranking> getByRouteID(@RequestParam String id_ruta){
 

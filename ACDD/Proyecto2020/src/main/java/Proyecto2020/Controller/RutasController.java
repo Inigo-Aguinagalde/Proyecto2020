@@ -24,53 +24,103 @@ public class RutasController {
 	@Autowired
 	private RutasRepository RR;
 
+	///////		MOSTRAR TODAS LAS RUTAS DEL SISTEMA		////////
+	
 	@GetMapping("/todas")
 	public List<Rutas> getRutas(){
 
 		return RR.findAll();
 	}
 	
+	///////		BUSCAR RUTA MEDIANTE -ID-	////////
+	
 	@GetMapping("/ruta")
 	public Rutas detalles(@RequestParam String id){
-		Rutas s = RR.findById(id).orElse(null);
-		return s;
-	}
-
-	@PostMapping("/añadir")
-	public Rutas añadirRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam ArrayList<String> lista_puntos,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
-
-		Rutas r = new Rutas(nombre,ciudad, lista_puntos,duracion,ciudad,km,puntos);
-
-		return RR.save(r);
-	}
-
-	@GetMapping("/findById")
-	public Rutas findById(@RequestParam String id){
 		Rutas r = RR.findById(id).orElse(null);
 		return r;
 	}
 
-	@RequestMapping("/updateCiudad")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion, String id_localizaciones,int km,String ciudad, ArrayList<String>lista_puntos) {
+	///////		AÑADIR NUEVA RUTA	////////
+	
+	@PostMapping("/add")
+	public Rutas addRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
+
+		Rutas r = new Rutas(nombre,ciudad, duracion,ciudad,km,puntos);
+		RR.save(r);
+		
+		return r;
+	}
+
+	///////		AÑADIR LOCALIZACION A UNA RUTA	////////
+	
+	@RequestMapping("/AddLocations")
+	public @ResponseBody Rutas addLocations(@RequestParam String id_ruta, @RequestParam String id_location) {
+		
+		Rutas r = RR.findById(id_ruta).orElse(null);
+		
+		ArrayList<String> lista_nueva = r.getLista_puntos();
+		lista_nueva.add(id_location);
+		r.setLista_puntos(lista_nueva);
+		RR.save(r);
+		
+		return r;
+	}
+	
+	
+	///////		ELIMINAR LOCALIZACION A UNA RUTA	////////
+	
+	@RequestMapping("/RemoveLocations")
+	public @ResponseBody Rutas RemoveLocation(@RequestParam String id_ruta, @RequestParam String id_location) {
+		
+		Rutas r = RR.findById(id_ruta).orElse(null);
+		
+		ArrayList<String> lista_nueva = r.getLista_puntos();
+		lista_nueva.remove(id_location);
+		r.setLista_puntos(lista_nueva);
+		RR.save(r);
+		
+		return r;
+	}
+	
+	///////		MODIFICAR UNA RUTA EN CONCRETO	////////
+	
+	@RequestMapping("/updateRuta")
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion,double km,String ciudad) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
-		if(nombre==null) {
-			r.getNombre();
-		}else if(duracion==null) {
-			r.getDuracion();
-		}else if(lista_puntos==null) {
-			r.getLista_puntos();
-		}else if(km==0) {
-			r.getKm();
-		}else if(ciudad==null) {
-			r.getCiudad();
+		if(nombre!=null) {
+			r.setNombre(nombre);
+		}else if(duracion!=null) {
+			r.setDuracion(duracion);
+		}else if(km!=0) {
+			r.setKm(km);
+		}else if(ciudad!=null) {
+			r.setCiudad(ciudad);
+		}
+		
+		RR.save(r);
+
+		return r;
+	}
+
+	///////		ELIMINAR UNA RUTA EN CONCRETO	////////
+	
+	@RequestMapping("/DeleteRuta")
+	public @ResponseBody String deleteRuta(@RequestParam String id) {
+
+		String comprobacion;
+		Rutas r = RR.findById(id).orElse(null);
+		RR.delete(r);
+		Rutas c = RR.findById(id).orElse(null);
+		if(c == null) {
+			comprobacion = "se ha eliminado";
+		}else {
+			comprobacion = "no se ha podido eliminar";
 		}
 
-		return r;
+		return comprobacion;
 	}
-
-
 
 
 }

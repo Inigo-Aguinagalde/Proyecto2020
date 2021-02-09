@@ -23,14 +23,18 @@ public class UsuarioController {
 	@Autowired
 	private UsuariosRepository RR;
 
+	///////		MOSTRAR TODOS LOS USUARIOS	////////
+	
 	@GetMapping("/todas")
 	public List<Usuarios> getUsuario(){
 
 		return RR.findAll();
 	}
 
-	@PostMapping("/añadir")
-	public boolean añadirUsuario(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
+	///////		REGISTRO DE USUARIO, AÑADIR NUEVO USUARIO	////////
+	
+	@PostMapping("/add")
+	public boolean addUsuario(@RequestParam String username, @RequestParam String email, @RequestParam String password) {
 
 		boolean añadido = false;
 
@@ -48,22 +52,27 @@ public class UsuarioController {
 
 	}
 
+	///////		UPDATE DE UN USUARIO SOLO TIENE UN CAMPO OBLIGATORIO -ID-	////////
+	
 	@RequestMapping("/updateUsuario")
-	public @ResponseBody Usuarios updateRuta(@RequestParam String id, String username, String email, String password) {
+	public @ResponseBody Usuarios updateUser(@RequestParam String id, String username, String email, String password) {
 
 		Usuarios s = RR.findById(id).orElse(null);
 
-		if(username==null) {
-			s.getName();
-		}else if(email==null) {
-			s.getEmail();
-		}else if(password==null) {
-			s.getPassword();
+		if(username!=null) {
+			s.setName(username);
+		}else if(email!=null) {
+			s.setEmail(email);
+		}else if(password!=null) {
+			s.setPassword(password);
 		}
+		RR.save(s);
 
 		return s;
 	}
 
+	///////		LOGIN DE USUARIO PARA LA APLICACIÓN MOVIL	////////
+	
 	@RequestMapping("/login")
 	public @ResponseBody Usuarios username(@RequestParam String email ,@RequestParam String password){
 
@@ -80,6 +89,8 @@ public class UsuarioController {
 		return s_vuelta;
 	}
 
+	///////		LOGIN DEL ADMIN PARA LA APLICACIÓN DE ELECTRON	////////
+	
 	@RequestMapping("/loginAdmin")
 	public @ResponseBody boolean admin(@RequestParam String email ,@RequestParam String password){
 
@@ -97,18 +108,8 @@ public class UsuarioController {
 		return login;
 	}
 
-	@GetMapping("/GetUsername")
-	public String getUsername(@RequestParam String email){
-		Usuarios s = RR.findByEmail(email).orElse(null);
-		return s.getName();
-	}
-
-	@GetMapping("/GetUser")
-	public Usuarios getUser(@RequestParam String email){
-		Usuarios s = RR.findByEmail(email).orElse(null);
-		return s;
-	}
-
+	///////		INSERTAR RUTA ACTIVA A UN USUARIO MEDIANTE -ID_USUARIO-	Y -ID_RUTA-		////////
+	
 	@RequestMapping("/updateRutaActiva")
 	public @ResponseBody Usuarios updateRutaActiva(@RequestParam String id_ruta ,@RequestParam String id_user){
 
@@ -119,6 +120,8 @@ public class UsuarioController {
 		return s;
 	}
 
+	///////		ELIMINAR LA RUTA ACTIVA DE UN USUARIO MEDIANTE -ID-	////////
+	
 	@RequestMapping("/deleteRutaActiva")
 	public @ResponseBody Usuarios deleteRutaActiva(@RequestParam String id_user){
 
@@ -128,7 +131,22 @@ public class UsuarioController {
 
 		return s;
 	}
-
-
+	
+	///////		ELIMINAR UN USUARIO MEDIANTE -ID-	////////
+	
+	@RequestMapping("/delete")
+	public @ResponseBody String deleteUser(@RequestParam String id) {
+		
+		String ejecutado;
+		Usuarios s = RR.findById(id).orElse(null);
+		RR.delete(s);
+		Usuarios comprobacion = RR.findById(id).orElse(null);
+		if(comprobacion == null) {
+			ejecutado = "correcto";
+		}else {
+			ejecutado = "No se ha podido eliminar";
+		}
+		return ejecutado;
+	}
 
 }
