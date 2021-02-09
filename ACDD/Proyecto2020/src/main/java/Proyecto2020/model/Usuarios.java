@@ -17,13 +17,15 @@ public class Usuarios {
 
 	private boolean admin;
 
+	private String rutaActiva ;
+
 	public Usuarios(String name, String email, String password) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.email= email;
 	}
-	
+
 	public Usuarios() {
 	}
 
@@ -65,6 +67,14 @@ public class Usuarios {
 
 	public void setAdmin(boolean reversa){
 		this.admin = reversa;
+	}
+
+	public void setRutaActiva(String id_ruta){
+		this.rutaActiva = id_ruta;
+	}
+
+	public String getRutaActiva() {
+		return rutaActiva;
 	}
 
 }

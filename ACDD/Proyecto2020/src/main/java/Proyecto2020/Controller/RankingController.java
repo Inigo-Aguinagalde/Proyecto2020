@@ -22,27 +22,27 @@ public class  RankingController {
 
 	@Autowired
 	private RankingRepository RR;
-	
+
 	@GetMapping("/todas")
 	public List<Ranking> getRanking(){
-				
+
 		return RR.findAll();
 	}
-	
+
 	@PostMapping("/añadir")
 	public  Ranking añadirPuntuacuin(@RequestParam double puntos,@RequestParam String id_usuario ,@RequestParam String id_ruta) {
-		
+
 		Ranking marca = new Ranking(puntos,id_usuario,id_ruta);
 		RR.save(marca);
-		
+
 		return marca;
 	}
-	
+
 	@RequestMapping("/update")
 	public @ResponseBody Ranking updateRanking(@RequestParam String id, int puntos, String id_usuarios , String id_ruta) {
-		
+
 		Ranking r = RR.findById(id).orElse(null);
-		
+
 		if(puntos==0) {
 			r.getPuntos();
 		}else if(id_usuarios==null) {
@@ -50,15 +50,15 @@ public class  RankingController {
 		}else if(id_ruta==null) {
 			r.getId_ruta();
 		}
-		
+
 		return r;
 	}
-	
+
 	@GetMapping("/getByRouteId")
 	public @ResponseBody List<Ranking> getByRouteID(@RequestParam String id_ruta){
-		
-		List<Ranking> lista_ranking = RR.findById_ruta(id_ruta);
-		
+
+		List<Ranking> lista_ranking = RR.findByIdRuta(id_ruta);
+
 		return lista_ranking;
 	}
 }

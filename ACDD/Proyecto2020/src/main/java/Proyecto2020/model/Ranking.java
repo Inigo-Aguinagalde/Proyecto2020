@@ -8,11 +8,11 @@ public class Ranking {
 
 	@Id
 	private String id;
-	
+
 	private double puntos;
-	
+
 	private String idUsuarios;
-	
+
 	private String idRuta;
 
 	public Ranking(double puntos, String id_usuarios, String id_ruta) {
@@ -43,21 +43,21 @@ public class Ranking {
 	}
 
 	public String getId_usuarios() {
-		return id_usuarios;
+		return idUsuarios;
 	}
 
 	public void setId_usuarios(String id_usuarios) {
-		this.id_usuarios = id_usuarios;
+		this.idUsuarios = id_usuarios;
 	}
 
 	public String getId_ruta() {
-		return id_ruta;
+		return idRuta;
 	}
 
 	public void setId_ruta(String id_ruta) {
-		this.id_ruta = id_ruta;
+		this.idRuta = id_ruta;
 	}
-	
-	
-	
+
+
+
 }

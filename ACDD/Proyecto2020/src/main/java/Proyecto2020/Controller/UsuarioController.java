@@ -108,4 +108,27 @@ public class UsuarioController {
 		Usuarios s = RR.findByEmail(email).orElse(null);
 		return s;
 	}
+
+	@RequestMapping("/updateRutaActiva")
+	public @ResponseBody Usuarios updateRutaActiva(@RequestParam String id_ruta ,@RequestParam String id_user){
+
+		Usuarios s = RR.findById(id_user).orElse(null);
+		s.setRutaActiva(id_ruta);
+		RR.save(s);
+
+		return s;
+	}
+
+	@RequestMapping("/deleteRutaActiva")
+	public @ResponseBody Usuarios deleteRutaActiva(@RequestParam String id_user){
+
+		Usuarios s = RR.findById(id_user).orElse(null);
+		s.setRutaActiva("");
+		RR.save(s);
+
+		return s;
+	}
+
+
+
 }
