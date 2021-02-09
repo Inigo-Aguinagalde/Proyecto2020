@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:juego/widget/Chat_widget.dart';
+
 
 class Chat extends StatefulWidget {
   Chat({Key key}) : super(key: key);
@@ -18,7 +20,7 @@ class _Chat extends State<Chat> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[Chat_widget()],
         ),
       ),
     );

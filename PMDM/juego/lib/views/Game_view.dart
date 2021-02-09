@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Controller/LocalizacionesController.dart';
-import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
 import 'package:juego/Models/Ruta.dart';
