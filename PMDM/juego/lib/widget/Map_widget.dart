@@ -4,13 +4,11 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:juego/Controller/RankingController.dart';
-import 'package:juego/Controller/RouteController.dart';
 import 'package:juego/Controller/UserController.dart';
 import 'package:juego/Models/Localizaciones.dart';
-import 'package:juego/Models/Usuarios.dart';
 import 'package:juego/Providers/ContadorPuntos.dart';
+import 'package:juego/views/Ranking_view.dart';
 import 'package:provider/provider.dart';
-import 'package:juego/views/Game_view.dart';
 
 // ignore: must_be_immutable
 class Mapa extends StatefulWidget {
@@ -195,9 +193,19 @@ class _Mapa extends State<Mapa> {
   }
 
   _guardarPuntos() {
+    Navigator.of(context, rootNavigator: true).pop('dialog');
     double puntos =
         Provider.of<ContadorPuntos>(context, listen: false).getPuntos;
-    addRegistro(puntos,widget.user_id,widget.ruta_id);
     deleteRutaActiva(widget.user_id);
+    addRegistro(puntos, widget.user_id, widget.ruta_id).then((value) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RankingView(
+            ranking: value,
+          ),
+        ),
+      );
+    });
   }
 }

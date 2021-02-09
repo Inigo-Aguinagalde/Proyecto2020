@@ -1,20 +1,15 @@
 class Ranking {
   String id;
-  String id_usuario;
-  String id_ruta;
+  String idUsuario;
+  String idRuta;
   double puntuacion;
 
- Ranking({
-   this.id,
-   this.id_usuario,
-   this.id_ruta,
-   this.puntuacion
- });
+  Ranking({this.idUsuario, this.idRuta, this.puntuacion});
 
- Ranking.fromJson(Map<String, dynamic> json) {
+  Ranking.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    id_usuario = json['idUsuario'];
-    id_ruta = json['idRuta'];
+    idUsuario = json['idUsuario'];
+    idRuta = json['idRuta'];
     puntuacion = json['puntuacion'];
   }
 }

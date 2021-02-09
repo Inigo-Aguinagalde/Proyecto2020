@@ -29,7 +29,7 @@ class _WidgetRoute extends State<RouteSelection> {
     });
 
     return ChangeNotifierProvider<ContadorPuntos>(
-      create: (context) => ContadorPuntos(),
+      create: (_) => ContadorPuntos(),
       child: MaterialApp(
         title: 'Seleccion de rutas',
         theme: ThemeData(
@@ -58,21 +58,22 @@ class _WidgetRoute extends State<RouteSelection> {
                       Text('Duracion:' + _rutas[index].duracion + 'h'),
                       // ignore: missing_required_param
                       IconButton(
-                          icon: Icon(Icons.check),
-                          onPressed: () {
-                            updateRutaActiva(_rutas[index].id, widget.user.id)
-                                .then((value) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Game(
-                                    ruta: _rutas[index],
-                                    user: value,
-                                  ),
+                        icon: Icon(Icons.check),
+                        onPressed: () {
+                          updateRutaActiva(_rutas[index].id, loged_user.id)
+                              .then((value) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Game(
+                                  ruta: _rutas[index],
+                                  user: value,
                                 ),
-                              );
-                            });
-                          }),
+                              ),
+                            );
+                          });
+                        },
+                      ),
                     ],
                   ));
             },
