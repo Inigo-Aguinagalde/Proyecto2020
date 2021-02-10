@@ -45,7 +45,7 @@ public class RutasController {
 	@PostMapping("/add")
 	public Rutas addRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos,@RequestParam String descripcion) {
 
-		Rutas r = new Rutas(nombre,ciudad, duracion,km,puntos,descripcion);
+		Rutas r = new Rutas(nombre, duracion, ciudad, km, puntos, descripcion);
 		RR.save(r);
 		
 		return r;
