@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/Models/Message.dart';
-
+import 'package:juego/Providers/ItemsMessages.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'package:provider/provider.dart';
 
 class Chat_widget extends StatefulWidget {
   Chat_widget({Key key, this.usuario, this.ruta}) : super(key: key);
@@ -25,14 +26,16 @@ class _Chat_widget extends State<Chat_widget> {
 
   //los datos del usuario
   Socket socketChat;
-  String nick = 'Likatz';
-  String ruta = 'Ruta X';
+  String nick = 'username';
+  String ruta = 'rutaID';
 
   //la lista que contendra los mensajes
   List<MessageItem> items = List<MessageItem>();
 
+
   @override
   void initState() {
+    
     nick = widget.usuario;
     ruta = widget.ruta;
     connectToServer();
@@ -63,7 +66,6 @@ class _Chat_widget extends State<Chat_widget> {
           (data) => escucharServer(utf8.decode(data)),
         );
         setState(() {
-          
         });
       } 
     );
@@ -85,6 +87,8 @@ class _Chat_widget extends State<Chat_widget> {
     print('onData: $data');
     setState(() {
       print("data");
+      //Provider.of<ItemsMessages>(context,listen: false).addMessage(MessageItem(data['from'], data['value']));
+      //items = Provider.of<ItemsMessages>(context,listen: false).getItems;
       items.insert(0, MessageItem(data['from'], data['value']));
     });
   }
@@ -160,6 +164,7 @@ class _Chat_widget extends State<Chat_widget> {
       messageController.clear();
 
       setState(() {
+        //Provider.of<ItemsMessages>(context,listen: false).addMessage(MessageItem(nick, msg));
         items.insert(0, MessageItem(nick, msg));
       });
 

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:juego/widget/Chat_widget.dart';
-
+import 'package:provider/provider.dart';
+import 'package:juego/Providers/ItemsMessages.dart';
 
 class Chat extends StatefulWidget {
   Chat({Key key, this.usuario,this.ruta}) : super(key: key);
@@ -18,10 +19,13 @@ class _Chat extends State<Chat> {
       appBar: AppBar(
         title: Text("Chat"),
       ),
-      body: Chat_widget(
+      body: ChangeNotifierProvider<ItemsMessages>(
+      create: (_) => ItemsMessages(),
+      child: Chat_widget(
               usuario:widget.usuario,
               ruta:widget.ruta,
             ),
+      ),
     );
   }
 }

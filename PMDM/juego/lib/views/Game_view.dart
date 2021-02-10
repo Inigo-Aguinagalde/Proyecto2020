@@ -11,6 +11,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'Chat_view.dart';
 
+
 // ignore: must_be_immutable
 class Game extends StatefulWidget {
   Game({this.ruta, this.user, Key key}) : super(key: key);

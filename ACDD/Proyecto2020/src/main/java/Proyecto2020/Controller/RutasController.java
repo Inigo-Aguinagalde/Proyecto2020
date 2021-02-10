@@ -43,9 +43,9 @@ public class RutasController {
 	///////		AÑADIR NUEVA RUTA	////////
 	
 	@PostMapping("/add")
-	public Rutas addRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos) {
+	public Rutas addRuta(@RequestParam String nombre, @RequestParam String duracion,@RequestParam String ciudad,@RequestParam int km,@RequestParam int puntos,@RequestParam String descripcion) {
 
-		Rutas r = new Rutas(nombre,ciudad, duracion,ciudad,km,puntos);
+		Rutas r = new Rutas(nombre,ciudad, duracion,km,puntos,descripcion);
 		RR.save(r);
 		
 		return r;
@@ -85,7 +85,7 @@ public class RutasController {
 	///////		MODIFICAR UNA RUTA EN CONCRETO	////////
 	
 	@RequestMapping("/updateRuta")
-	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion,double km,String ciudad) {
+	public @ResponseBody Rutas updateRuta(@RequestParam String id, String nombre, String duracion,String ciudad,String descripcion,double puntos,double km) {
 
 		Rutas r = RR.findById(id).orElse(null);
 
@@ -97,6 +97,10 @@ public class RutasController {
 			r.setKm(km);
 		}else if(ciudad!=null) {
 			r.setCiudad(ciudad);
+		}else if(descripcion!=null) {
+			r.setDescripcion(descripcion);
+		}else if(puntos != 0) {
+			r.setPuntos(puntos);
 		}
 		
 		RR.save(r);
